@@ -11,7 +11,8 @@ import static de.jupf.staticlog.Log.format.*;
 public class JavaTest {
     public static void main(String[] args) {
         Format format = Log.format.create();
-        format.line(date("yyyy-MM-dd HH:mm:ss"), space(2), level(), space(1), message(), space(1), tag());
+        format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), space(1), tag());
+        format.indent(indent(indent(line(message()))));
 
         // Log.info();
 

@@ -12,9 +12,6 @@ buildscript {
 }
 
 apply plugin: "kotlin"
-apply plugin: "application"
-
-mainClassName = "example.ExampleKt"
 
 repositories {
     mavenCentral()
@@ -22,4 +19,12 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+//create a jar with sources
+task sjar(type: Jar) {
+    baseName = project.name
+//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from sourceSets.main.kotlin
+    with jar
 }
