@@ -26,5 +26,6 @@ task sjar(type: Jar) {
     baseName = project.name
 //    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     from sourceSets.main.kotlin
+    exclude('*JavaTest*')
     with jar
 }
