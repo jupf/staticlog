@@ -12,7 +12,7 @@ public class JavaTest {
     public static void main(String[] args) {
         Format format = Log.format.create();
         format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), space(1), tag());
-        format.indent(indent(indent(line(message()))));
+        format.indent(line(message()));
 
         // Log.info();
 
@@ -20,5 +20,7 @@ public class JavaTest {
         Log.debug("This is a debug message");
         Log.warn("This is a warning message");
         Log.error("This is a error message");
+        Log.error("This is an error message with an additional Exception for output",
+                new Exception("Exeption Text",new Exception("This is the cause")));
     }
 }

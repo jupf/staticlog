@@ -8,7 +8,6 @@ import de.jupf.staticlog.core.LogLevel
  * @author J.Pfeifer
  */
 class Line : LineScope()
-
 class Indent : IndentScope()
 class Format : Scope()
 
@@ -32,6 +31,9 @@ abstract class Scope : Builder {
 
     val epoch: Builder
         get() = Epoch()
+
+    internal val exception: Builder
+        get() = ExceptionB()
 
     internal fun line(init: Line.() -> Unit) = initScope(Line(), init)
     fun indent(init: Indent.() -> Unit) = initScope(Indent(), init)
@@ -84,7 +86,7 @@ abstract class Scope : Builder {
         return Date(format)
     }
 
-    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Exception?, builder: StringBuilder, indent: String) {
+    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, indent: String) {
         for (i in children.indices) {
             children[i].buildString(logLevel, time, message, tag, exception, builder, indent)
         }
@@ -98,18 +100,19 @@ abstract class Scope : Builder {
 }
 
 abstract class LineScope : Scope() {
-    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Exception?, builder: StringBuilder, indent: String) {
+    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, indent: String) {
         if (!indent.equals(""))
             builder.append(indent)
         for (i in children.indices) {
             children[i].buildString(logLevel, time, message, tag, exception, builder, indent)
         }
+
         builder.appendln()
     }
 }
 
 abstract class IndentScope : Scope() {
-    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Exception?, builder: StringBuilder, indent: String) {
+    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, indent: String) {
         for (i in children.indices) {
             children[i].buildString(logLevel, time, message, tag, exception, builder, indent + "   ")
         }

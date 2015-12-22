@@ -32,27 +32,31 @@ internal object LogCore {
     private fun printWhiteLog(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?) {
         val builder = StringBuilder()
         LogFormat.buildString(level,time,message,tag,exception,builder,"")
-        print(builder)
-        System.out.flush()
+        exception?.buildString(level,time,message,tag,builder)
+        printFlush(builder)
     }
 
     private fun printRedLog(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?) {
         val builder = StringBuilder()
         LogFormat.buildString(level,time,message,tag,exception,builder,"")
-        printerr(builder)
+        exception?.buildString(level,time,message,tag,builder)
+        printerrFlush(builder)
     }
 
     fun getTrace(): String {
-//        for(s in Exception().stackTrace)
-//            println(s.toString())
         if(LogFormat.calledFromJava)
             return Exception().stackTrace[3].toString()
         return Exception().stackTrace[2].toString()
     }
 
-    internal fun printerr(message: Any?) {
+    internal fun printerrFlush(message: Any?) {
         System.err.print(message);
         System.err.flush()
+    }
+
+    internal fun printFlush(message: Any?) {
+        System.out.print(message);
+        System.out.flush()
     }
 }
 
@@ -63,4 +67,18 @@ object LogFormat : Scope() {
         line(date("yyyy-MM-dd HH:mm:ss"),space,level,space(2),message,space(2),tag)
     }
 
+}
+
+object ExceptionFormat : Scope() {
+    init {
+        indent {
+            indent {
+                line(exception)
+            }
+        }
+    }
+}
+
+internal fun Throwable.buildString(level: LogLevel, time: Long, message: String, tag: String,builder: StringBuilder) {
+    ExceptionFormat.buildString(level,time,message,tag,this,builder,"")
 }
