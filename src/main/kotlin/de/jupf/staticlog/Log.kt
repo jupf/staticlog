@@ -19,22 +19,22 @@ class Log {
      */
     companion object Log{
         @JvmStatic
-        fun info(message: String, tag: String = LogCore.getTrace(), exception: Exception? = null) {
+        fun info(message: String, tag: String, exception: Exception?) {
             LogCore.info(System.currentTimeMillis(), message, tag, exception)
         }
 
         @JvmStatic
-        fun warn(message: String, tag: String = LogCore.getTrace(), exception: Exception? = null) {
+        fun warn(message: String, tag: String, exception: Exception?) {
             LogCore.warn(System.currentTimeMillis(), message, tag, exception)
         }
 
         @JvmStatic
-        fun error(message: String, tag: String = LogCore.getTrace(), exception: Exception? = null) {
+        fun error(message: String, tag: String, exception: Exception?) {
             LogCore.error(System.currentTimeMillis(), message, tag, exception)
         }
 
         @JvmStatic
-        fun debug(message: String, tag: String = LogCore.getTrace(), exception: Exception? = null) {
+        fun debug(message: String, tag: String, exception: Exception?) {
             LogCore.debug(System.currentTimeMillis(), message, tag, exception)
         }
 
