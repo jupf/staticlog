@@ -1,12 +1,11 @@
-@file:JvmName("Log")
-@file:JvmMultifileClass
-
 package de.jupf.staticlog
 
 import de.jupf.staticlog.core.LogCore
 import de.jupf.staticlog.core.LogFormat
 import de.jupf.staticlog.format.Builder
 import de.jupf.staticlog.format.Format
+import de.jupf.staticlog.format.Indent
+import de.jupf.staticlog.format.Line
 
 
 /**
@@ -149,6 +148,24 @@ class Log {
         @JvmStatic
         fun tag(): Builder {
             return LogFormat.tag
+        }
+
+        @JvmStatic
+        fun line(vararg builders: Builder): Builder {
+            val line = Line()
+            for (i in builders.indices) {
+                line.children.add(builders[i])
+            }
+            return line
+        }
+
+        @JvmStatic
+        fun indent(vararg builders: Builder): Builder {
+            val indent = Indent()
+            for (i in builders.indices) {
+                indent.children.add(builders[i])
+            }
+            return indent
         }
     }
 }

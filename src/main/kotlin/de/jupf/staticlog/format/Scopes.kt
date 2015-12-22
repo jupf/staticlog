@@ -1,6 +1,5 @@
 package de.jupf.staticlog.format
 
-import de.jupf.staticlog.core.LogFormat
 import de.jupf.staticlog.core.LogLevel
 
 /**
@@ -9,6 +8,7 @@ import de.jupf.staticlog.core.LogLevel
  * @author J.Pfeifer
  */
 class Line : LineScope()
+
 class Indent : IndentScope()
 class Format : Scope()
 
@@ -33,8 +33,8 @@ abstract class Scope : Builder {
     val epoch: Builder
         get() = Epoch()
 
-    internal fun line(init: Line.() -> Unit) = initScope(Line(),init)
-    fun indent(init: Indent.() -> Unit) = initScope(Indent(),init)
+    internal fun line(init: Line.() -> Unit) = initScope(Line(), init)
+    fun indent(init: Indent.() -> Unit) = initScope(Indent(), init)
 
     fun line(vararg builders: Builder) {
         line {
@@ -44,9 +44,27 @@ abstract class Scope : Builder {
         }
     }
 
+    fun indentLine(vararg builders: Builder) {
+        indent {
+            line {
+                for (i in builders.indices) {
+                    this.children.add(builders[i])
+                }
+            }
+        }
+    }
+
+    fun indent(vararg builders: Builder) {
+        indent {
+            for (i in builders.indices) {
+                this.children.add(builders[i])
+            }
+        }
+    }
+
     fun tab(times: Int): Builder {
         var tabString = ""
-        for(i in 1..times) {
+        for (i in 1..times) {
             tabString += "\t"
         }
         val tabs = TextBuilder(tabString)
@@ -55,7 +73,7 @@ abstract class Scope : Builder {
 
     fun space(times: Int): Builder {
         var tabString = ""
-        for(i in 1..times) {
+        for (i in 1..times) {
             tabString += " "
         }
         val tabs = TextBuilder(tabString)
@@ -67,8 +85,8 @@ abstract class Scope : Builder {
     }
 
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Exception?, builder: StringBuilder, indent: String) {
-        for(i in children.indices) {
-            children[i].buildString(logLevel,time,message,tag,exception,builder,indent)
+        for (i in children.indices) {
+            children[i].buildString(logLevel, time, message, tag, exception, builder, indent)
         }
     }
 
@@ -81,18 +99,19 @@ abstract class Scope : Builder {
 
 abstract class LineScope : Scope() {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Exception?, builder: StringBuilder, indent: String) {
-        if(!indent.equals(""))
+        if (!indent.equals(""))
             builder.append(indent)
-        for(i in children.indices) {
-            children[i].buildString(logLevel,time,message,tag,exception,builder,indent)
+        for (i in children.indices) {
+            children[i].buildString(logLevel, time, message, tag, exception, builder, indent)
         }
         builder.appendln()
     }
 }
+
 abstract class IndentScope : Scope() {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Exception?, builder: StringBuilder, indent: String) {
-        for(i in children.indices) {
-            children[i].buildString(logLevel,time,message,tag,exception,builder,indent+"   ")
+        for (i in children.indices) {
+            children[i].buildString(logLevel, time, message, tag, exception, builder, indent + "   ")
         }
     }
 }
