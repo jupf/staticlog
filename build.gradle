@@ -1,5 +1,5 @@
 group 'jupf'
-version '0.2-ALPHA'
+version '0.2.0-ALPHA'
 
 buildscript {
     ext.kotlin_version = '1.0.0-beta-3595'
