@@ -10,19 +10,22 @@ import de.jupf.staticlog.Log
  */
 fun main(args : Array<String>) {
     Log.format {
-        line(date("yyyy-MM-dd HH:mm:ss"),space,level,space(2),message,space(2),tag)
-//        indent {
-//            line(message)
-//        }
+        line(date("yyyy-MM-dd HH:mm:ss"),space,level,space,tag)
+        indent {
+            line(message)
+        }
     }
+
+    val exception = Exception("Exeption Text",Exception("This is the cause"));
 
     Log.info("This is an info message")
     Thread.sleep(50)
-    Log.debug("This is a debug message")
+    Log.debug("This is a debug message with an additional Exception for output",exception)
     Thread.sleep(50)
-    Log.warn("This is a warning message")
+    Log.warn("This is a warning message","with a custom tag")
     Thread.sleep(50)
-    Log.error("This is an error message")
-    Thread.sleep(50)
-    Log.error("This is an error message with an additional Exception for output", Exception("Exeption Text",Exception("This is the cause")))
+    Log.error("This is an error message with an additional Exception for output", "and a custom tag", exception )
+
+
+
 }
