@@ -56,6 +56,12 @@ class Log {
         }
 
         @JvmStatic
+        fun info(message: String, tag: String) {
+            val exception: Exception? = null
+            LogCore.info(System.currentTimeMillis(), message, tag, exception)
+        }
+
+        @JvmStatic
         fun info(message: String) {
             val tag = LogCore.getTrace()
             val exception: Exception? = null
@@ -65,6 +71,12 @@ class Log {
         @JvmStatic
         fun warn(message: String, exception: Exception?) {
             val tag = LogCore.getTrace()
+            LogCore.warn(System.currentTimeMillis(), message, tag, exception)
+        }
+
+        @JvmStatic
+        fun warn(message: String, tag: String) {
+            val exception: Exception? = null
             LogCore.warn(System.currentTimeMillis(), message, tag, exception)
         }
 
@@ -82,6 +94,12 @@ class Log {
         }
 
         @JvmStatic
+        fun debug(message: String, tag: String) {
+            val exception: Exception? = null
+            LogCore.debug(System.currentTimeMillis(), message, tag, exception)
+        }
+
+        @JvmStatic
         fun debug(message: String) {
             val tag = LogCore.getTrace()
             val exception: Exception? = null
@@ -91,6 +109,12 @@ class Log {
         @JvmStatic
         fun error(message: String, exception: Exception?) {
             val tag = LogCore.getTrace()
+            LogCore.error(System.currentTimeMillis(), message, tag, exception)
+        }
+
+        @JvmStatic
+        fun error(message: String, tag: String) {
+            val exception: Exception? = null
             LogCore.error(System.currentTimeMillis(), message, tag, exception)
         }
 
