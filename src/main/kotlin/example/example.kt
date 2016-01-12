@@ -1,6 +1,7 @@
 package example
 
 import de.jupf.staticlog.Log
+import de.jupf.staticlog.core.LogLevel
 
 
 /**
@@ -9,12 +10,14 @@ import de.jupf.staticlog.Log
  * @author jpf
  */
 fun main(args : Array<String>) {
-    Log.format {
-        line(date("yyyy-MM-dd HH:mm:ss"),space,level,space,tag)
-        indent {
-            line(message)
-        }
-    }
+//    Log.format {
+//        line(date("yyyy-MM-dd HH:mm:ss"),space,level,space,tag)
+//        indent {
+//            line(message)
+//        }
+//    }
+
+
 
     val exception = Exception("Exeption Text",Exception("This is the cause"));
 
@@ -26,6 +29,7 @@ fun main(args : Array<String>) {
     Thread.sleep(50)
     Log.error("This is an error message with an additional Exception for output", "and a custom tag", exception )
 
+    Log.logLevel = LogLevel.INFO
 
-
+    Log.error("This message will not be shown")
 }

@@ -12,7 +12,6 @@ enum class LogLevel {
 }
 
 internal object LogCore {
-
     fun info(time: Long, log: String, tag: String, exception: Exception?) {
         printWhiteLog(LogLevel.INFO, time, log, tag, exception)
     }
@@ -31,20 +30,20 @@ internal object LogCore {
 
     private fun printWhiteLog(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?) {
         val builder = StringBuilder()
-        LogFormat.buildString(level,time,message,tag,exception,builder,"")
-        exception?.buildString(level,time,message,tag,builder)
+        LogFormat.buildString(level, time, message, tag, exception, builder, "")
+        exception?.buildString(level, time, message, tag, builder)
         printFlush(builder)
     }
 
     private fun printRedLog(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?) {
         val builder = StringBuilder()
-        LogFormat.buildString(level,time,message,tag,exception,builder,"")
-        exception?.buildString(level,time,message,tag,builder)
+        LogFormat.buildString(level, time, message, tag, exception, builder, "")
+        exception?.buildString(level, time, message, tag, builder)
         printerrFlush(builder)
     }
 
     fun getTrace(): String {
-        if(LogFormat.calledFromJava)
+        if (LogFormat.calledFromJava)
             return Exception().stackTrace[3].toString()
         return Exception().stackTrace[2].toString()
     }
@@ -66,10 +65,9 @@ object LogFormat : Scope() {
     init {
         line(date("yyyy-MM-dd HH:mm:ss"),space,level,space(2),message,space(2),tag)
     }
-
 }
 
-object ExceptionFormat : Scope() {
+internal object ExceptionFormat : Scope() {
     init {
         indent {
             indent {
