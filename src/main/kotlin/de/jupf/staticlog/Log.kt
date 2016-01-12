@@ -7,6 +7,9 @@ import de.jupf.staticlog.format.Builder
 import de.jupf.staticlog.format.Format
 import de.jupf.staticlog.format.Indent
 import de.jupf.staticlog.format.Line
+import java.util.concurrent.locks.ReentrantReadWriteLock
+import kotlin.concurrent.read
+import kotlin.concurrent.write
 
 
 /**
@@ -19,8 +22,9 @@ class Log {
      * Main StaticLog logging interface
      */
     companion object Log{
+        val lock = ReentrantReadWriteLock()
         @JvmStatic var logLevel = LogLevel.DEBUG
-            set(value) = synchronized(logLevel){field = value}
+            set(value) = lock.write { field = value }
 
         @JvmStatic
         fun info(message: String, tag: String, exception: Exception?) {
@@ -50,7 +54,7 @@ class Log {
             LogFormat.build()
         }
 
-        private fun checkLogLevel(level: LogLevel) = synchronized(logLevel) {logLevel >= level}
+        private fun checkLogLevel(level: LogLevel) = lock.read{logLevel >= level}
 
         ///////////////////////////////////////////////////////////////////////////////////
         // Needing overloaded functions for java.. or the getTrace() call would go wrong //
