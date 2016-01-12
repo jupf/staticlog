@@ -69,8 +69,7 @@ abstract class ExceptionBuilder : Builder {
             }
             if (exception.cause != null) {
                 builder.setLength(builder.length-3)
-                val cause = exception.cause // needed for mysterious reasons... otherwise couldn't call javaClass...
-                builder.append("Caused by: "+cause.javaClass.name + ": " + cause.message + "\n" + indent + "   ")
+                builder.append("Caused by: "+exception.cause!!.javaClass.name + ": " + exception.cause!!.message + "\n" + indent + "   ")
                 for (i in exception.stackTrace.indices) {
                     builder.append("at " + exception.stackTrace[i].toString() + "\n" + indent + "   ")
                 }
