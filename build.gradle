@@ -1,17 +1,24 @@
 group 'jupf'
-version '0.2.0-alpha'
+version '1.0.0'
 
 buildscript {
-    ext.kotlin_version = '1.0.0-beta-3595'
+    ext.kotlin_version = '1.0.0-beta-4584'
+    ext.extraConfVersion = '3.0.3'
+
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.netflix.nebula:gradle-extra-configurations-plugin:$extraConfVersion"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
     }
 }
 
 apply plugin: "kotlin"
+apply plugin: "nebula.provided-base"
+apply plugin: 'com.github.johnrengelman.shadow'
 
 repositories {
     mavenCentral()
@@ -19,13 +26,22 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    provided 'com.google.android:android:2.2.1'
 }
 
 //create a jar with sources
-task sjar(type: Jar) {
-    baseName = project.name
-//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    from sourceSets.main.kotlin
-    exclude('*JavaTest*')
-    with jar
+jar {
+    baseName = 'staticlog'
+    from { sourceSets.main.kotlin }
+}
+
+// create a jar with sources and
+shadowJar {
+    baseName = 'staticlog4Java'
+    classifier = ''
+    dependencies {
+        include(dependency("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"))
+        include(dependency("org.jetbrains.kotlin:kotlin-runtime:$kotlin_version"))
+    }
+    from { sourceSets.main.kotlin }
 }

@@ -1,6 +1,9 @@
 package de.jupf.staticlog.format
 
 import de.jupf.staticlog.core.LogLevel
+import kotlin.collections.arrayListOf
+import kotlin.collections.indices
+import kotlin.text.appendln
 
 /**
  * Created on 20.12.2015.
@@ -22,6 +25,9 @@ abstract class Scope : Builder {
 
     val tag: Builder
         get() = Tag()
+
+    val occurrence: Builder
+        get() = Occurrence()
 
     val tab: Builder
         get() = TextBuilder("\t")
@@ -86,9 +92,9 @@ abstract class Scope : Builder {
         return Date(format)
     }
 
-    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, indent: String) {
+    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         for (i in children.indices) {
-            children[i].buildString(logLevel, time, message, tag, exception, builder, indent)
+            children[i].buildString(logLevel, time, message, tag, exception, builder, trace, indent)
         }
     }
 
@@ -100,11 +106,11 @@ abstract class Scope : Builder {
 }
 
 abstract class LineScope : Scope() {
-    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, indent: String) {
+    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         if (!indent.equals(""))
             builder.append(indent)
         for (i in children.indices) {
-            children[i].buildString(logLevel, time, message, tag, exception, builder, indent)
+            children[i].buildString(logLevel, time, message, tag, exception, builder, trace, indent)
         }
 
         builder.appendln()
@@ -112,9 +118,9 @@ abstract class LineScope : Scope() {
 }
 
 abstract class IndentScope : Scope() {
-    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, indent: String) {
+    override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         for (i in children.indices) {
-            children[i].buildString(logLevel, time, message, tag, exception, builder, indent + "   ")
+            children[i].buildString(logLevel, time, message, tag, exception, builder, trace, indent + "   ")
         }
     }
 }

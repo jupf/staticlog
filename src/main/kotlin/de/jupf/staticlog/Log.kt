@@ -8,6 +8,7 @@ import de.jupf.staticlog.format.Format
 import de.jupf.staticlog.format.Indent
 import de.jupf.staticlog.format.Line
 import java.util.concurrent.locks.ReentrantReadWriteLock
+import kotlin.collections.indices
 import kotlin.concurrent.read
 import kotlin.concurrent.write
 
@@ -28,25 +29,29 @@ class Log {
 
         @JvmStatic
         fun info(message: String, tag: String, exception: Exception?) {
-            LogCore.info(System.currentTimeMillis(), message, tag, exception)
+            if(!checkLogLevel(LogLevel.INFO)) return;
+            val trace = LogCore.getTrace()
+            LogCore.info(message, tag, exception, trace)
         }
 
         @JvmStatic
         fun warn(message: String, tag: String, exception: Exception?) {
-            if(checkLogLevel(LogLevel.WARN))
-                LogCore.warn(System.currentTimeMillis(), message, tag, exception)
+            if(!checkLogLevel(LogLevel.WARN)) return
+            val trace = LogCore.getTrace()
+            LogCore.warn(message, tag, exception, trace)
         }
 
         @JvmStatic
         fun error(message: String, tag: String, exception: Exception?) {
-            if(checkLogLevel(LogLevel.ERROR))
-                LogCore.error(System.currentTimeMillis(), message, tag, exception)
+            val trace = LogCore.getTrace()
+            LogCore.error(message, tag, exception, trace)
         }
 
         @JvmStatic
         fun debug(message: String, tag: String, exception: Exception?) {
-            if(checkLogLevel(LogLevel.DEBUG))
-                LogCore.debug(System.currentTimeMillis(), message, tag, exception)
+            if(!checkLogLevel(LogLevel.DEBUG)) return
+            val trace = LogCore.getTrace()
+            LogCore.debug(message, tag, exception, trace)
         }
 
         fun format(build: LogFormat.() -> Unit) {
@@ -54,7 +59,7 @@ class Log {
             LogFormat.build()
         }
 
-        private fun checkLogLevel(level: LogLevel) = lock.read{logLevel >= level}
+        private fun checkLogLevel(level: LogLevel) = lock.read{logLevel <= level}
 
         ///////////////////////////////////////////////////////////////////////////////////
         // Needing overloaded functions for java.. or the getTrace() call would go wrong //
@@ -63,87 +68,83 @@ class Log {
 
         @JvmStatic
         fun info(message: String, exception: Exception?) {
-            val tag = LogCore.getTrace()
-            LogCore.info(System.currentTimeMillis(), message, tag, exception)
+            if(!checkLogLevel(LogLevel.INFO)) return;
+            val trace = LogCore.getTrace()
+            LogCore.info(message, "", exception,trace)
         }
 
         @JvmStatic
         fun info(message: String, tag: String) {
-            val exception: Exception? = null
-            LogCore.info(System.currentTimeMillis(), message, tag, exception)
+            if(!checkLogLevel(LogLevel.INFO)) return;
+            val trace = LogCore.getTrace()
+            LogCore.info(message, tag, null, trace)
         }
 
         @JvmStatic
         fun info(message: String) {
-            val tag = LogCore.getTrace()
-            val exception: Exception? = null
-            LogCore.info(System.currentTimeMillis(), message, tag, exception)
+            if(!checkLogLevel(LogLevel.INFO)) return;
+            val trace = LogCore.getTrace()
+            LogCore.info(message, "", null, trace)
         }
 
         @JvmStatic
         fun warn(message: String, exception: Exception?) {
             if(!checkLogLevel(LogLevel.WARN)) return;
-            val tag = LogCore.getTrace()
-            LogCore.warn(System.currentTimeMillis(), message, tag, exception)
+            val trace = LogCore.getTrace()
+            LogCore.warn(message, "", exception, trace)
         }
 
         @JvmStatic
         fun warn(message: String, tag: String) {
             if(!checkLogLevel(LogLevel.WARN)) return;
-            val exception: Exception? = null
-            LogCore.warn(System.currentTimeMillis(), message, tag, exception)
+            val trace = LogCore.getTrace()
+            LogCore.warn(message, tag, null, trace)
         }
 
         @JvmStatic
         fun warn(message: String) {
             if(!checkLogLevel(LogLevel.WARN)) return;
-            val tag = LogCore.getTrace()
-            val exception: Exception? = null
-            LogCore.warn(System.currentTimeMillis(),message, tag, exception)
+            val trace = LogCore.getTrace()
+            LogCore.warn(message, "", null, trace)
         }
 
         @JvmStatic
         fun debug(message: String, exception: Exception?) {
             if(!checkLogLevel(LogLevel.DEBUG)) return;
-            val tag = LogCore.getTrace()
-            LogCore.debug(System.currentTimeMillis(), message, tag, exception)
+            val trace = LogCore.getTrace()
+            LogCore.debug(message, "", exception, trace)
         }
 
         @JvmStatic
         fun debug(message: String, tag: String) {
             if(!checkLogLevel(LogLevel.DEBUG)) return;
-            val exception: Exception? = null
-            LogCore.debug(System.currentTimeMillis(), message, tag, exception)
+            val trace = LogCore.getTrace()
+            LogCore.debug(message, tag, null, trace)
         }
 
         @JvmStatic
         fun debug(message: String) {
             if(!checkLogLevel(LogLevel.DEBUG)) return;
-            val tag = LogCore.getTrace()
-            val exception: Exception? = null
-            LogCore.debug(System.currentTimeMillis(), message, tag, exception)
+            val trace = LogCore.getTrace()
+            LogCore.debug(message, "", null, trace)
         }
 
         @JvmStatic
         fun error(message: String, exception: Exception?) {
-            if(!checkLogLevel(LogLevel.ERROR)) return;
-            val tag = LogCore.getTrace()
-            LogCore.error(System.currentTimeMillis(), message, tag, exception)
+            val trace = LogCore.getTrace()
+            LogCore.error(message, "", exception, trace)
         }
 
         @JvmStatic
         fun error(message: String, tag: String) {
-            if(!checkLogLevel(LogLevel.ERROR)) return;
-            val exception: Exception? = null
-            LogCore.error(System.currentTimeMillis(), message, tag, exception)
+            val trace = LogCore.getTrace()
+            LogCore.error(message, tag, null, trace)
         }
 
         @JvmStatic
         fun error(message: String) {
-            if(!checkLogLevel(LogLevel.ERROR)) return;
-            val tag = LogCore.getTrace()
-            val exception: Exception? = null
-            LogCore.error(System.currentTimeMillis(), message, tag, exception)
+            val trace = LogCore.getTrace()
+            LogCore.error(message, "", null, trace)
         }
     }
 
@@ -193,6 +194,11 @@ class Log {
         @JvmStatic
         fun tag(): Builder {
             return LogFormat.tag
+        }
+
+        @JvmStatic
+        fun occurrence(): Builder {
+            return LogFormat.occurrence
         }
 
         @JvmStatic
