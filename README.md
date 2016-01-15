@@ -53,8 +53,6 @@ You can find the example source code [here](https://github.com/jupf/staticlog/bl
 ### Logging in Java
 Logging with StaticLog in Kotlin is as easy as it gets:
 ```java
-Exception exception = new Exception("Exception text", new Exception("This is the cause"));
-
 Log.info("This is an info message");
 Log.debug("This is a debug message");
 Log.warn("This is a warning message","with a custom tag");
@@ -72,7 +70,7 @@ import static de.jupf.staticlog.Log.format.*;
 ...
 
 Format format = Log.format.create();
-line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), tab(1), tag(), space(2), message(), space(2), occurrence());
+format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), tab(1), tag(), space(2), message(), space(2), occurrence());
 ```
 You can even define multiple lines and indent them:  
 ```java
