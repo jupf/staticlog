@@ -3,6 +3,17 @@ StaticLog is a super lightweight logging library written in pure Kotlin. It is d
 It is just for formatting standard output. There are no fancy extras added!  
 ## Getting Started in Kotlin
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).
+### Logging in Kotlin
+Logging with StaticLog in Kotlin is as easy as it gets:
+```kotlin
+Log.info("This is an info message")
+Log.debug("This is a debug message")
+Log.warn("This is a warning message","with a custom tag")
+Log.error("This is an error message with an additional Exception for output", "and a custom tag", exception )
+
+Log.logLevel = LogLevel.WARN
+Log.info("This message will not be shown")
+```
 ### Formatting Output in Kotlin
 To define an output format for StaticLog in Kotlin is very easy. It uses a mix from builders and function call syntax.  
 This defines for example the default format:  
@@ -20,14 +31,15 @@ Log.format {
     }
 }
 ```
+### FormatBuilders in Kotlin
 Here are all possible FormatBuilders: 
 
-| FormatBuilders   |     Output      |
+| FormatBuilder   |     Output      |
 |:----------------:|:---------------:|
-| date(Pattern)    | Prints the date in the given pattern  (The pattern is defined in [SimpleDateFormat](http://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html))  |
+| date(Pattern)    | Prints the date in the given pattern  <br>(The pattern is defined in [SimpleDateFormat](http://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html))</br>  |
 | epoch            | Prints the current time in milliseconds  |
 | level            | Prints the log level |
-| tag              | Prints the log tag (If none was given, it defaults to the class name the message is logged from.) |
+| tag              | Prints the log tag <br>(If none was provided to the logging function, <br>it defaults to the class name the message was logged from.)</br></br> |
 | message          | Prints the log message |
 | occurrence       | Prints the origin of the logging (In Eclipse and IntelliJ clickable!)|
 | space            | Prints 1 space  |
@@ -35,31 +47,9 @@ Here are all possible FormatBuilders:
 | tab              | Prints 1 tab |
 | tab(X: Integer)  | Prints X tabs |
 
-### Logging in Kotlin
-Logging with StaticLog in Kotlin is as easy as it gets:
-```kotlin
-Log.info("This is an info message")
-Log.debug("This is a debug message")
-Log.warn("This is a warning message","with a custom tag")
-Log.error("This is an error message with an additional Exception for output", "and a custom tag", exception )
 
-Log.logLevel = LogLevel.WARN
-Log.info("This message will not be shown")
-```
 ## Getting Started in Java
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/java/example/Example.java).
-### Formatting Output in Java
-To define an output format for StaticLog in Java is very easy.  
-This defines for example the default format:  
-```java
-import static de.jupf.staticlog.Log.format.*;
-
-...
-
-Format format = Log.format.create();
-line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), tab(1), tag(), space(2), message(), space(2), occurrence());
-```
-You can even define multiple lines and indent them. See [Formatting in Details] (https://github.com/jupf/staticlog#formatting-in-details)
 ### Logging in Java
 Logging with StaticLog in Kotlin is as easy as it gets:
 ```java
@@ -73,5 +63,28 @@ Log.error("This is an error message with an additional Exception for output", "a
 Log.setLogLevel(LogLevel.WARN);
 Log.info("This message will not be shown");
 ```
-### Formatting in Details
-coming soon..
+### Formatting Output in Java
+To define an output format for StaticLog in Java is very easy.  
+This defines for example the default format:  
+```java
+import static de.jupf.staticlog.Log.format.*;
+
+...
+
+Format format = Log.format.create();
+line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), tab(1), tag(), space(2), message(), space(2), occurrence());
+```
+You can even define multiple lines and indent them. See [Formatting in Details] (https://github.com/jupf/staticlog#formatting-in-details)
+### FormatBuilders in Java
+Here are all possible FormatBuilders:
+
+| FormatBuilder   |     Output      |
+|:----------------:|:---------------:|
+| date(Pattern)    | Prints the date in the given pattern  <br>(The pattern is defined in [SimpleDateFormat](http://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html))</br>  |
+| epoch()          | Prints the current time in milliseconds  |
+| level()          | Prints the log level |
+| tag()            | Prints the log tag <br>(If none was provided to the logging function, <br>it defaults to the class name the message was logged from.)</br></br> |
+| message()        | Prints the log message |
+| occurrence()     | Prints the origin of the logging (In Eclipse and IntelliJ clickable!)|
+| space(X: Integer)| Prints X spaces    |
+| tab(X: Integer)  | Prints X tabs |
