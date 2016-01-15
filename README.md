@@ -25,7 +25,7 @@ Log.format {
 You can even define multiple lines and indent them:  
 ```kotlin
 Log.format {
-    line(date("yyyy-MM-dd HH:mm:ss"), space, level, tab, tag, space(2), space(2), occurrence)
+    line(date("yyyy-MM-dd HH:mm:ss"), space, level, tab, tag, space(2), occurrence)
     indent {
         line(message)
     }
@@ -74,7 +74,12 @@ import static de.jupf.staticlog.Log.format.*;
 Format format = Log.format.create();
 line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), tab(1), tag(), space(2), message(), space(2), occurrence());
 ```
-You can even define multiple lines and indent them. See [Formatting in Details] (https://github.com/jupf/staticlog#formatting-in-details)
+You can even define multiple lines and indent them:  
+```java
+format = Log.format.create();
+format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), tab(1), tag(), space(2), occurrence());
+format.indent(line(message()));
+```
 ### FormatBuilders in Java
 Here are all possible FormatBuilders:
 
