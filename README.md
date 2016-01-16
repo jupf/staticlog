@@ -1,6 +1,19 @@
 # StaticLog
 StaticLog is a super lightweight logging library written in pure Kotlin. It is designed to be used in Kotlin and Java.  
-It is just for formatting standard output. There are no fancy extras added!  
+It is just for formatting standard output without the need to construct a Logger object. 
+
+## Table of Contents
+
+- [StaticLog](#staticlog)
+	- [Getting Started in Kotlin](#getting-started-in-kotlin)
+		- [Logging in Kotlin](#logging-in-kotlin)
+		- [Formatting Output in Kotlin](#formatting-output-in-kotlin)
+		- [FormatBuilders in Kotlin](#formatbuilders-in-kotlin)
+	- [Getting Started in Java](#getting-started-in-java)
+		- [Logging in Java](#logging-in-java)
+		- [Formatting Output in Java](#formatting-output-in-java)
+		- [FormatBuilders in Java](#formatbuilders-in-java)
+
 ## Getting Started in Kotlin
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).
 ### Logging in Kotlin
