@@ -22,21 +22,21 @@ class Log {
     /**
      * Main StaticLog logging interface
      */
-    companion object Log{
+    companion object Log {
         val lock = ReentrantReadWriteLock()
         @JvmStatic var logLevel = LogLevel.DEBUG
             set(value) = lock.write { field = value }
 
         @JvmStatic
         fun info(message: String, tag: String, exception: Exception?) {
-            if(!checkLogLevel(LogLevel.INFO)) return;
+            if (!checkLogLevel(LogLevel.INFO)) return;
             val trace = LogCore.getTrace()
             LogCore.info(message, tag, exception, trace)
         }
 
         @JvmStatic
         fun warn(message: String, tag: String, exception: Exception?) {
-            if(!checkLogLevel(LogLevel.WARN)) return
+            if (!checkLogLevel(LogLevel.WARN)) return
             val trace = LogCore.getTrace()
             LogCore.warn(message, tag, exception, trace)
         }
@@ -49,7 +49,7 @@ class Log {
 
         @JvmStatic
         fun debug(message: String, tag: String, exception: Exception?) {
-            if(!checkLogLevel(LogLevel.DEBUG)) return
+            if (!checkLogLevel(LogLevel.DEBUG)) return
             val trace = LogCore.getTrace()
             LogCore.debug(message, tag, exception, trace)
         }
@@ -59,7 +59,7 @@ class Log {
             LogFormat.build()
         }
 
-        private fun checkLogLevel(level: LogLevel) = lock.read{logLevel <= level}
+        private fun checkLogLevel(level: LogLevel) = lock.read { logLevel <= level }
 
         ///////////////////////////////////////////////////////////////////////////////////
         // Needing overloaded functions for java.. or the getTrace() call would go wrong //
@@ -68,63 +68,63 @@ class Log {
 
         @JvmStatic
         fun info(message: String, exception: Exception?) {
-            if(!checkLogLevel(LogLevel.INFO)) return;
+            if (!checkLogLevel(LogLevel.INFO)) return;
             val trace = LogCore.getTrace()
-            LogCore.info(message, "", exception,trace)
+            LogCore.info(message, "", exception, trace)
         }
 
         @JvmStatic
         fun info(message: String, tag: String) {
-            if(!checkLogLevel(LogLevel.INFO)) return;
+            if (!checkLogLevel(LogLevel.INFO)) return;
             val trace = LogCore.getTrace()
             LogCore.info(message, tag, null, trace)
         }
 
         @JvmStatic
         fun info(message: String) {
-            if(!checkLogLevel(LogLevel.INFO)) return;
+            if (!checkLogLevel(LogLevel.INFO)) return;
             val trace = LogCore.getTrace()
             LogCore.info(message, "", null, trace)
         }
 
         @JvmStatic
         fun warn(message: String, exception: Exception?) {
-            if(!checkLogLevel(LogLevel.WARN)) return;
+            if (!checkLogLevel(LogLevel.WARN)) return;
             val trace = LogCore.getTrace()
             LogCore.warn(message, "", exception, trace)
         }
 
         @JvmStatic
         fun warn(message: String, tag: String) {
-            if(!checkLogLevel(LogLevel.WARN)) return;
+            if (!checkLogLevel(LogLevel.WARN)) return;
             val trace = LogCore.getTrace()
             LogCore.warn(message, tag, null, trace)
         }
 
         @JvmStatic
         fun warn(message: String) {
-            if(!checkLogLevel(LogLevel.WARN)) return;
+            if (!checkLogLevel(LogLevel.WARN)) return;
             val trace = LogCore.getTrace()
             LogCore.warn(message, "", null, trace)
         }
 
         @JvmStatic
         fun debug(message: String, exception: Exception?) {
-            if(!checkLogLevel(LogLevel.DEBUG)) return;
+            if (!checkLogLevel(LogLevel.DEBUG)) return;
             val trace = LogCore.getTrace()
             LogCore.debug(message, "", exception, trace)
         }
 
         @JvmStatic
         fun debug(message: String, tag: String) {
-            if(!checkLogLevel(LogLevel.DEBUG)) return;
+            if (!checkLogLevel(LogLevel.DEBUG)) return;
             val trace = LogCore.getTrace()
             LogCore.debug(message, tag, null, trace)
         }
 
         @JvmStatic
         fun debug(message: String) {
-            if(!checkLogLevel(LogLevel.DEBUG)) return;
+            if (!checkLogLevel(LogLevel.DEBUG)) return;
             val trace = LogCore.getTrace()
             LogCore.debug(message, "", null, trace)
         }
@@ -199,6 +199,11 @@ class Log {
         @JvmStatic
         fun occurrence(): Builder {
             return LogFormat.occurrence
+        }
+
+        @JvmStatic
+        fun text(text: String): Builder {
+            return LogFormat.text(text)
         }
 
         @JvmStatic
