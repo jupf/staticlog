@@ -1,6 +1,19 @@
 # StaticLog
 StaticLog is a super lightweight logging library written in pure Kotlin. It is designed to be used in Kotlin and Java.  
-It is just for formatting standard output. There are no fancy extras added!  
+It is just for formatting standard output without the need to construct a Logger object. 
+
+## Table of Contents
+
+- [StaticLog](#staticlog)
+	- [Getting Started in Kotlin](#getting-started-in-kotlin)
+		- [Logging in Kotlin](#logging-in-kotlin)
+		- [Formatting Output in Kotlin](#formatting-output-in-kotlin)
+		- [FormatBuilders in Kotlin](#formatbuilders-in-kotlin)
+	- [Getting Started in Java](#getting-started-in-java)
+		- [Logging in Java](#logging-in-java)
+		- [Formatting Output in Java](#formatting-output-in-java)
+		- [FormatBuilders in Java](#formatbuilders-in-java)
+
 ## Getting Started in Kotlin
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).
 ### Logging in Kotlin
@@ -53,8 +66,6 @@ You can find the example source code [here](https://github.com/jupf/staticlog/bl
 ### Logging in Java
 Logging with StaticLog in Kotlin is as easy as it gets:
 ```java
-Exception exception = new Exception("Exception text", new Exception("This is the cause"));
-
 Log.info("This is an info message");
 Log.debug("This is a debug message");
 Log.warn("This is a warning message","with a custom tag");
@@ -72,7 +83,7 @@ import static de.jupf.staticlog.Log.format.*;
 ...
 
 Format format = Log.format.create();
-line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), tab(1), tag(), space(2), message(), space(2), occurrence());
+format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), tab(1), tag(), space(2), message(), space(2), occurrence());
 ```
 You can even define multiple lines and indent them:  
 ```java
