@@ -21,8 +21,8 @@ Logging with StaticLog in Kotlin is as easy as it gets:
 ```kotlin
 Log.info("This is an info message")
 Log.debug("This is a debug message")
-Log.warn("This is a warning message","with a custom tag")
-Log.error("This is an error message with an additional Exception for output", "and a custom tag", exception )
+Log.warn("This is a warning message","WithACustomTag")
+Log.error("This is an error message with an additional Exception for output", "AndACustomTag", exception )
 
 Log.logLevel = LogLevel.WARN
 Log.info("This message will not be shown")
@@ -32,13 +32,13 @@ To define an output format for StaticLog in Kotlin is very easy. It uses a mix f
 This defines for example the default format:  
 ```kotlin
 Log.format {
-    line(date("yyyy-MM-dd HH:mm:ss"), space, level, tab, tag, space(2), message, space(2), occurrence)
+    line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
 }
 ```
 You can even define multiple lines and indent them:  
 ```kotlin
 Log.format {
-    line(date("yyyy-MM-dd HH:mm:ss"), space, level, tab, tag, space(2), occurrence)
+    line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), occurrence)
     indent {
         line(message)
     }
@@ -59,7 +59,7 @@ Here are all possible FormatBuilders:
 | space(X: Integer)| Prints X spaces    |
 | tab              | Prints 1 tab |
 | tab(X: Integer)  | Prints X tabs |
-
+| text(S: String)  | Prints the String S |
 
 ## Getting Started in Java
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/java/example/Example.java).
@@ -68,8 +68,8 @@ Logging with StaticLog in Kotlin is as easy as it gets:
 ```java
 Log.info("This is an info message");
 Log.debug("This is a debug message");
-Log.warn("This is a warning message","with a custom tag");
-Log.error("This is an error message with an additional Exception for output", "and a custom tag", exception );
+Log.warn("This is a warning message","WithACustomTag");
+Log.error("This is an error message with an additional Exception for output", "AndACustomTag", exception );
 
 Log.setLogLevel(LogLevel.WARN);
 Log.info("This message will not be shown");
@@ -83,12 +83,12 @@ import static de.jupf.staticlog.Log.format.*;
 ...
 
 Format format = Log.format.create();
-format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), tab(1), tag(), space(2), message(), space(2), occurrence());
+format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), text("/"), tag(), space(2), message(), space(2), occurrence());
 ```
 You can even define multiple lines and indent them:  
 ```java
 format = Log.format.create();
-format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), tab(1), tag(), space(2), occurrence());
+format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), text("/"), tag(), space(2), occurrence());
 format.indent(line(message()));
 ```
 ### FormatBuilders in Java
@@ -104,3 +104,4 @@ Here are all possible FormatBuilders:
 | occurrence()     | Prints the origin of the logging (In Eclipse and IntelliJ clickable!)|
 | space(X: Integer)| Prints X spaces    |
 | tab(X: Integer)  | Prints X tabs |
+| text(S: String)  | Prints the String S |
