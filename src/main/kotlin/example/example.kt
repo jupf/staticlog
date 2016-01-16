@@ -11,7 +11,7 @@ import de.jupf.staticlog.core.LogLevel
  */
 fun main(args : Array<String>) {
     Log.format {
-         line(date("yyyy-MM-dd HH:mm:ss"), space, level, tab, tag, space(2), message, space(2), occurrence)
+         line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
     }
 
     val exception = Exception("Exeption Text",Exception("This is the cause"));
@@ -20,9 +20,9 @@ fun main(args : Array<String>) {
     Thread.sleep(50)
     Log.debug("This is a debug message")
     Thread.sleep(50)
-    Log.warn("This is a warning message","with a custom tag")
+    Log.warn("This is a warning message","WithACustomTag")
     Thread.sleep(50)
-    Log.error("This is an error message with an additional Exception for output", "and a custom tag", exception )
+    Log.error("This is an error message with an additional Exception for output", "AndACustomTag", exception)
 
     Log.logLevel = LogLevel.WARN
 
@@ -32,7 +32,7 @@ fun main(args : Array<String>) {
 
     // multi-line format:
     Log.format {
-        line(date("yyyy-MM-dd HH:mm:ss"), space, level, tab, tag, space(2), occurrence)
+        line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), occurrence)
         indent {
             line(message)
         }

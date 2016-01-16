@@ -21,7 +21,7 @@ public class Example {
         Log.info("This is an info message");
         Log.debug("This is a debug message");
         Log.warn("This is a warning message","with a custom tag");
-        Log.error("This is an error message with an additional Exception for output", "and a custom tag", exception );
+        Log.error("This is an error message with an additional Exception for output", "and a custom tag", exception);
 
         Log.setLogLevel(LogLevel.WARN);
         Log.info("This message will not be shown");

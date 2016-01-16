@@ -92,6 +92,10 @@ abstract class Scope : Builder {
         return Date(format)
     }
 
+    fun text(text: String): Builder {
+        return Text(text)
+    }
+
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         for (i in children.indices) {
             children[i].buildString(logLevel, time, message, tag, exception, builder, trace, indent)

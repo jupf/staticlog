@@ -19,13 +19,14 @@ class Tag : TagBuilder()
 class Epoch : EpochBuilder()
 class Date(format: String) : DateBuilder(format)
 class Occurrence() : OccurrenceBuilder()
+class Text(text: String) : TextBuilder(text)
 internal class ExceptionB : ExceptionBuilder()
 
 interface Builder {
     fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String)
 }
 
-internal class TextBuilder(val text: String) : Builder {
+open internal class TextBuilder(val text: String) : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         builder.append(text)
     }
@@ -60,10 +61,10 @@ abstract class DateBuilder(format: String) : Builder {
 abstract class TagBuilder : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         if(!tag.equals(""))
-            builder.append("[$tag]")
+            builder.append("$tag")
         else {
             val className = trace.className.split(".")
-            builder.append("[${className[className.size-1]}]")
+            builder.append("${className[className.size-1]}")
         }
     }
 }
