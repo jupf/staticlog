@@ -1,20 +1,21 @@
 # StaticLog
-StaticLog is a super lightweight logging library written in pure Kotlin. It is designed to be used in Kotlin and Java.  
-It is just for formatting standard output without the need to construct a Logger object. 
+StaticLog is a super lightweight logging library written in pure Kotlin. It is designed to be used in Kotlin, Java and Android.  
+It is for formatting standard output comfortably without the need to construct a Logger object. 
 
 ## Table of Contents
 
 - [StaticLog](#staticlog)
-	- [Getting Started in Kotlin](#getting-started-in-kotlin)
+	- [StaticLog in Kotlin](#staticlog-in-kotlin)
 		- [Logging in Kotlin](#logging-in-kotlin)
 		- [Formatting Output in Kotlin](#formatting-output-in-kotlin)
 		- [FormatBuilders in Kotlin](#formatbuilders-in-kotlin)
-	- [Getting Started in Java](#getting-started-in-java)
+	- [StaticLog in Java](#staticlog-in-java)
 		- [Logging in Java](#logging-in-java)
 		- [Formatting Output in Java](#formatting-output-in-java)
 		- [FormatBuilders in Java](#formatbuilders-in-java)
+	- [StaticLog in Android](#staticlog-in-android)
 
-## Getting Started in Kotlin
+## StaticLog in Kotlin
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).
 ### Logging in Kotlin
 Logging with StaticLog in Kotlin is as easy as it gets:
@@ -61,7 +62,7 @@ Here are all possible FormatBuilders:
 | tab(X: Integer)  | Prints X tabs |
 | text(S: String)  | Prints the String S |
 
-## Getting Started in Java
+## StaticLog in Java
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/java/example/Example.java).
 ### Logging in Java
 Logging with StaticLog in Kotlin is as easy as it gets:
@@ -105,3 +106,13 @@ Here are all possible FormatBuilders:
 | space(X: Integer)| Prints X spaces    |
 | tab(X: Integer)  | Prints X tabs |
 | text(S: String)  | Prints the String S |
+
+## StaticLog in Android
+StaticLog automatically detects Android VMs and switches its output to the Android logger.  
+The default format for Android is defined like this:  
+```java
+Format format = Log.format.create();
+format.line(message(), space(2), occurrence());
+```
+The tag is forwarded to the Android logger. If none is provided, it defaults to the class name the log was printed from.  
+For further questions look at [StaticLog in Java](#staticlog-in-java)
