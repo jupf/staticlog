@@ -14,7 +14,7 @@ import static de.jupf.staticlog.Log.format.*;
 public class Example {
     public static void main(String[] args) {
         Format format = Log.format.create();
-        format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), text("/"), tag(), space(2), message(), space(2), occurrence());
+        format.line(date("yyyy-MM-dd HH:mm:ss.SSS"), space(1), level(), text("/"), tag(), space(2), message(), space(2), occurrence());
 
         Exception exception = new Exception("Exception text", new Exception("This is the cause"));
 
@@ -30,7 +30,7 @@ public class Example {
 
         // multi-line format:
         format = Log.format.create();
-        format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), text("/"), tag(), space(2), occurrence());
+        format.line(date("yyyy-MM-dd HH:mm:ss.SSS"), space(1), level(), text("/"), tag(), space(2), occurrence());
         format.indent(line(message()));
 
         Log.error("This is a multi-line log message");

@@ -111,7 +111,7 @@ object LogFormat : Scope() {
     internal var calledFromJava = false
 
     init {
-        line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
+        line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
     }
 }
 

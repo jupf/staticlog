@@ -11,7 +11,7 @@ import de.jupf.staticlog.core.LogLevel
  */
 fun main(args : Array<String>) {
     Log.format {
-         line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
+         line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
     }
 
     val exception = Exception("Exeption Text",Exception("This is the cause"));
@@ -32,7 +32,7 @@ fun main(args : Array<String>) {
 
     // multi-line format:
     Log.format {
-        line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), occurrence)
+        line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), occurrence)
         indent {
             line(message)
         }
