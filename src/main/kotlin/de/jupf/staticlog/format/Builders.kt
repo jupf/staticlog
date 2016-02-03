@@ -7,50 +7,39 @@ import kotlin.collections.indices
 import kotlin.text.split
 
 /**
- * Created on 20.12.2015.
- *
+ * @created 20.12.2015
  * @author J.Pfeifer
  */
-
-class Level : LevelBuilder()
-
-class Message : MessageBuilder()
-class Tag : TagBuilder()
-class Epoch : EpochBuilder()
-class Date(format: String) : DateBuilder(format)
-class Occurrence() : OccurrenceBuilder()
-class Text(text: String) : TextBuilder(text)
-internal class ExceptionB : ExceptionBuilder()
 
 interface Builder {
     fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String)
 }
 
-open internal class TextBuilder(val text: String) : Builder {
+open class TextBuilder(val text: String) : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         builder.append(text)
     }
 }
 
-abstract class MessageBuilder : Builder {
+class MessageBuilder : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         builder.append(message)
     }
 }
 
-abstract class LevelBuilder : Builder {
+class LevelBuilder : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         builder.append(logLevel.toString())
     }
 }
 
-abstract class EpochBuilder : Builder {
+class EpochBuilder : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         builder.append(time)
     }
 }
 
-abstract class DateBuilder(format: String) : Builder {
+class DateBuilder(format: String) : Builder {
     val dateFormat = SimpleDateFormat(format)
 
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
@@ -58,7 +47,7 @@ abstract class DateBuilder(format: String) : Builder {
     }
 }
 
-abstract class TagBuilder : Builder {
+class TagBuilder : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         if(!tag.equals(""))
             builder.append("$tag")
@@ -69,13 +58,13 @@ abstract class TagBuilder : Builder {
     }
 }
 
-abstract class OccurrenceBuilder : Builder {
+class OccurrenceBuilder : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         builder.append("[${trace.toString()}]")
     }
 }
 
-abstract class ExceptionBuilder : Builder {
+internal class ExceptionBuilder : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         if (exception != null) {
             builder.append(exception.javaClass.name + ": " + exception.message + "\n" + indent + "   ")

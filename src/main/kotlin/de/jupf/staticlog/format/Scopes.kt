@@ -6,28 +6,30 @@ import kotlin.collections.indices
 import kotlin.text.appendln
 
 /**
- * Created on 20.12.2015.
- *
+ * @created 20.12.2015.
  * @author J.Pfeifer
  */
-class Line : LineScope()
-class Indent : IndentScope()
-class Format : Scope()
+class Format() : Scope() // just for naming purposes in Java
 
-abstract class Scope : Builder {
+open class Scope() : Builder {
+
+    constructor(init: Scope.() -> Unit) : this() {
+        this.init()
+    }
+
     val children = arrayListOf<Builder>()
 
     val level: Builder
-        get() = Level()
+        get() = LevelBuilder()
 
     val message: Builder
-        get() = Message()
+        get() = MessageBuilder()
 
     val tag: Builder
-        get() = Tag()
+        get() = TagBuilder()
 
     val occurrence: Builder
-        get() = Occurrence()
+        get() = OccurrenceBuilder()
 
     val tab: Builder
         get() = TextBuilder("\t")
@@ -36,10 +38,10 @@ abstract class Scope : Builder {
         get() = TextBuilder(" ")
 
     val epoch: Builder
-        get() = Epoch()
+        get() = EpochBuilder()
 
     internal val exception: Builder
-        get() = ExceptionB()
+        get() = ExceptionBuilder()
 
     internal fun line(init: Line.() -> Unit) = initScope(Line(), init)
     fun indent(init: Indent.() -> Unit) = initScope(Indent(), init)
@@ -89,11 +91,11 @@ abstract class Scope : Builder {
     }
 
     fun date(format: String): Builder {
-        return Date(format)
+        return DateBuilder(format)
     }
 
     fun text(text: String): Builder {
-        return Text(text)
+        return TextBuilder(text)
     }
 
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
@@ -109,7 +111,7 @@ abstract class Scope : Builder {
     }
 }
 
-abstract class LineScope : Scope() {
+class Line : Scope() {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         if (!indent.equals(""))
             builder.append(indent)
@@ -121,7 +123,7 @@ abstract class LineScope : Scope() {
     }
 }
 
-abstract class IndentScope : Scope() {
+class Indent : Scope() {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
         for (i in children.indices) {
             children[i].buildString(logLevel, time, message, tag, exception, builder, trace, indent + "   ")

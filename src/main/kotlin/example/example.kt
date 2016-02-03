@@ -3,14 +3,12 @@ package example
 import de.jupf.staticlog.Log
 import de.jupf.staticlog.core.LogLevel
 
-
 /**
- * Created on 20.12.2015.
- *
+ * @created 20.12.2015
  * @author J.Pfeifer
  */
 fun main(args : Array<String>) {
-    Log.format {
+    Log.newFormat().build {
          line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
     }
 
@@ -24,14 +22,14 @@ fun main(args : Array<String>) {
     Thread.sleep(50)
     Log.error("This is an error message with an additional Exception for output", "AndACustomTag", exception)
 
-    Log.logLevel = LogLevel.WARN
+    Log.setLogLevel(LogLevel.WARN)
 
     Log.info("This message will not be shown")
 
 
 
     // multi-line format:
-    Log.format {
+    Log.newFormat().build {
         line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), occurrence)
         indent {
             line(message)
@@ -39,4 +37,7 @@ fun main(args : Array<String>) {
     }
 
     Log.error("This is a multi-line log message")
+
+    val logger = Log.kotlinInstance()
+    logger.debug("This message is from an individual logger instance")
 }
