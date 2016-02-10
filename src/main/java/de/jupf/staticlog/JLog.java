@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  * @author jpf
  * @created on 03.02.2016.
  */
-public class Log {
+public class JLog {
     protected static LogInstance logInstance = new LogInstance(true);
 
     /**
@@ -204,6 +204,10 @@ public class Log {
         logInstance.setLogLevel(logLevel);
     }
 
+    public static LogLevel getLogLevel() {
+        return logInstance.getLogLevel();
+    }
+
     /**
      * This method deletes the old [LogFormat] and
      * returns a handle to create the new format with.
@@ -296,7 +300,7 @@ public class Log {
         }
 
         /**
-         * Creates a [Builder] which prints the given [text]
+         * Creates a Builder which prints the given [text]
          *
          * @param text the text to print
          * @return [Builder] for [text]
