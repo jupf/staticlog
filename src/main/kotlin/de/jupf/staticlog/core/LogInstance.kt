@@ -8,8 +8,8 @@ import kotlin.concurrent.write
 
 
 /**
- * @created 19.01.2016
  * @author J.Pfeifer
+ * @created 19.01.2016
  */
 open class LogInstance() : Logger {
 
@@ -19,8 +19,8 @@ open class LogInstance() : Logger {
     open var logLevel = LogLevel.DEBUG
         set(value) = lock.write { field = value }
 
-    constructor(needLongTrace: Boolean) : this() {
-        logFormat.longTrace = needLongTrace
+    constructor(needLongTrace: Int) : this() {
+        logFormat.traceSteps = needLongTrace
     }
 
     /**
