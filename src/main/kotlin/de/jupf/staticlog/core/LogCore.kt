@@ -5,8 +5,10 @@ import de.jupf.staticlog.format.LogFormat
 import de.jupf.staticlog.format.TagBuilder
 
 /**
- * @created 20.12.2015.
+ * The LogCore Object implements the core logging functionality.
+ *
  * @author J.Pfeifer
+ * @created 20.12.2015.
  */
 enum class LogLevel {
     DEBUG, INFO, WARN, ERROR
@@ -82,9 +84,7 @@ internal object LogCore {
     }
 
     fun getTrace(logFormat: LogFormat): StackTraceElement {
-        if (logFormat.longTrace)
-           return Exception().stackTrace[3]
-        return Exception().stackTrace[2]
+        return Exception().stackTrace[logFormat.traceSteps]
     }
 
     internal fun printerrFlush(message: Any?) {
@@ -97,9 +97,6 @@ internal object LogCore {
         System.out.flush()
     }
 }
-
-
-
 
 
 internal fun Throwable.buildString(level: LogLevel, time: Long, message: String, tag: String, builder: StringBuilder, trace: StackTraceElement, logFormat: LogFormat) {
