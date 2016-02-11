@@ -1,6 +1,7 @@
 package example
 
 import de.jupf.staticlog.Log
+//import de.jupf.staticlog.
 import de.jupf.staticlog.core.LogLevel
 
 /**
@@ -22,10 +23,12 @@ fun main(args : Array<String>) {
     Thread.sleep(50)
     Log.error("This is an error message with an additional Exception for output", "AndACustomTag", exception)
 
-    Log.setLogLevel(LogLevel.WARN)
+//    Log.logLevel = LogLevel.WARN
+    Log.logLevel = LogLevel.WARN
+
 
     Log.info("This message will not be shown")
-
+    print("")
 
 
     // multi-line format:

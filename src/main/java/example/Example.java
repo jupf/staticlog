@@ -2,10 +2,11 @@ package example;
 
 import de.jupf.staticlog.Log;
 import de.jupf.staticlog.Logger;
-import de.jupf.staticlog.format.LogFormat;
 import de.jupf.staticlog.core.LogLevel;
+import de.jupf.staticlog.format.LogFormat;
 
 import static de.jupf.staticlog.Log.FormatOperations.*;
+
 
 /**
  * @author J.Pfeifer
@@ -23,10 +24,8 @@ public class Example {
         Log.debug("This is a debug message");
         Log.warn("This is a warning message", "WithACustomTag");
         Log.error("This is an error message with an additional Exception for output", "AndACustomText", exception);
-
         Log.setLogLevel(LogLevel.WARN);
         Log.info("This message will not be shown");
-
 
         // multi-line format:
         format = Log.newFormat();
@@ -37,5 +36,6 @@ public class Example {
 
         Logger logger = Log.javaInstance();
         logger.debug("This message is from an individual logger instance");
+
     }
 }
