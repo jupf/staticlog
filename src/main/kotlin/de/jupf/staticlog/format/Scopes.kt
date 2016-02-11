@@ -1,16 +1,11 @@
 package de.jupf.staticlog.format
 
 import de.jupf.staticlog.core.LogLevel
-import kotlin.collections.arrayListOf
-import kotlin.collections.indices
-import kotlin.text.appendln
 
 /**
- * @created 20.12.2015.
  * @author J.Pfeifer
+ * @created 20.12.2015.
  */
-class Format() : Scope() // just for naming purposes in Java
-
 open class Scope() : Builder {
 
     constructor(init: Scope.() -> Unit) : this() {
