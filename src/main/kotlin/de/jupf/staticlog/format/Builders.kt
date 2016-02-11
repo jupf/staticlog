@@ -7,8 +7,8 @@ import kotlin.collections.indices
 import kotlin.text.split
 
 /**
- * @created 20.12.2015
  * @author J.Pfeifer
+ * @created 20.12.2015
  */
 
 interface Builder {
