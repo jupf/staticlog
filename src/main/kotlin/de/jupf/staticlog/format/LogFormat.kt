@@ -33,7 +33,7 @@ class LogFormat() : Scope() {
         }
     }
 
-    public fun build(build: LogFormat.() -> Unit) {
+    fun build(build: LogFormat.() -> Unit) {
         children.clear()
         build()
     }
