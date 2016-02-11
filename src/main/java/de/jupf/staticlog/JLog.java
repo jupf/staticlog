@@ -9,19 +9,19 @@ import de.jupf.staticlog.format.Line;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * The StaticLog main logging interface class
+ * The StaticLog Java logging interface class
  *
- * @author jpf
+ * @author J.Pfeifer
  * @created on 03.02.2016.
  */
 public class JLog {
-    protected static LogInstance logInstance = new LogInstance(true);
+    protected static LogInstance logInstance = Log.INSTANCE.getLogInstance();
 
     /**
      * Returns a logger instance for Java
      */
     public static Logger javaInstance() {
-        return new LogInstance(false);
+        return new LogInstance(2);
     }
 
     /**
