@@ -1,8 +1,8 @@
 package de.jupf.staticlog.format
 
 /**
- * @created 20.01.2016.
- * @author jpf
+ * @author J.Pfeifer
+ * @created 20.01.2016
  */
 class LogFormat() : Scope() {
     init {
@@ -14,13 +14,13 @@ class LogFormat() : Scope() {
         build()
     }
 
-    internal var longTrace = false
+    internal var traceSteps = 3
     internal var androidOS: Boolean = when (System.getProperty("java.vm.vendor").equals("The Android Project")) {
         true -> {
             build {
                 line(message, space(2), occurrence)
             }
-            longTrace = true
+            traceSteps = 4
             true
         }
         false -> false
