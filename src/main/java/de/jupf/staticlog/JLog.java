@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  * The StaticLog Java logging interface class
  *
  * @author J.Pfeifer
- * @created on 03.02.2016.
+ * created on 03.02.2016.
  */
 public class JLog {
     protected static LogInstance logInstance = Log.INSTANCE.getLogInstance();
@@ -316,16 +316,16 @@ public class JLog {
          */
         public static Builder line(Builder... builders) {
             Line line = new Line();
-            for (int i = 0; i < builders.length; i++) {
-                line.getChildren().add(builders[i]);
+            for (Builder builder : builders) {
+                line.getChildren().add(builder);
             }
             return line;
         }
 
         public static Builder indent(Builder... builders) {
             Indent indent = new Indent();
-            for (int i = 0; i < builders.length; i++) {
-                indent.getChildren().add(builders[i]);
+            for (Builder builder : builders) {
+                indent.getChildren().add(builder);
             }
             return indent;
         }
