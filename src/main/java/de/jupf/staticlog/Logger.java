@@ -147,7 +147,7 @@ public interface Logger {
     void error(@NotNull String message);
 
     /**
-     * This method deletes the old [LogFormat] and
+     * This method deletes the old LogFormat and
      * returns a handle to create the new format with.
      *
      * @return log format handle
