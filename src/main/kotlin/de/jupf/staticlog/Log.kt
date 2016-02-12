@@ -235,8 +235,8 @@ object Log {
         return logInstance.newFormat()
     }
 
-    fun newFormat(build: LogFormat.() -> Unit) {
-        logInstance.newFormat().build()
+    fun newFormat(buildFun: LogFormat.() -> Unit) {
+        logInstance.newFormat().build(buildFun)
     }
 
     object FormatOperations {
