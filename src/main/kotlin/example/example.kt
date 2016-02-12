@@ -23,13 +23,9 @@ fun main(args : Array<String>) {
     Thread.sleep(50)
     Log.error("This is an error message with an additional Exception for output", "AndACustomTag", exception)
 
-//    Log.logLevel = LogLevel.WARN
     Log.logLevel = LogLevel.WARN
 
-
     Log.info("This message will not be shown")
-    print("")
-
 
     // multi-line format:
     Log.newFormat().build {
