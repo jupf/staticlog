@@ -49,11 +49,11 @@ class DateBuilder(format: String) : Builder {
 
 class TagBuilder : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement, indent: String) {
-        if(!tag.equals(""))
+        if (!tag.equals(""))
             builder.append("$tag")
         else {
             val className = trace.className.split(".")
-            builder.append("${className[className.size-1]}")
+            builder.append("${className[className.size - 1]}")
         }
     }
 }
@@ -72,14 +72,13 @@ internal class ExceptionBuilder : Builder {
                 builder.append("at " + exception.stackTrace[i].toString() + "\n" + indent + "   ")
             }
             if (exception.cause != null) {
-                builder.setLength(builder.length-3)
-                builder.append("Caused by: "+exception.cause!!.javaClass.name + ": " + exception.cause!!.message + "\n" + indent + "   ")
+                builder.setLength(builder.length - 3)
+                builder.append("Caused by: " + exception.cause!!.javaClass.name + ": " + exception.cause!!.message + "\n" + indent + "   ")
                 for (i in exception.stackTrace.indices) {
                     builder.append("at " + exception.stackTrace[i].toString() + "\n" + indent + "   ")
                 }
-            } else {
-                builder.setLength(builder.length-(indent.length+3))
             }
+            builder.setLength(builder.length - (indent.length + 4))
         }
     }
 }
