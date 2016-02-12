@@ -22,10 +22,12 @@ fun main(args : Array<String>) {
     Log.warn("This is a warning message","WithACustomTag")
     Thread.sleep(50)
     Log.error("This is an error message with an additional Exception for output", "AndACustomTag", exception)
+    Thread.sleep(50)
 
     Log.logLevel = LogLevel.WARN
 
     Log.info("This message will not be shown")
+    Thread.sleep(50)
 
     // multi-line format:
     Log.newFormat {
@@ -36,6 +38,7 @@ fun main(args : Array<String>) {
     }
 
     Log.error("This is a multi-line log message")
+    Thread.sleep(50)
 
     val logger = Log.kotlinInstance()
     logger.debug("This message is from an individual logger instance")
