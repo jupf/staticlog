@@ -1,25 +1,34 @@
 package de.jupf.staticlog.format
 
+import de.jupf.staticlog.core.printOnAndroid
+import de.jupf.staticlog.core.printRedLog
+import de.jupf.staticlog.core.printWhiteLog
+
 /**
  * @author J.Pfeifer
  * @created 20.01.2016
  */
 class LogFormat() : Scope() {
-    init {
-        line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
-    }
 
     internal var traceSteps = 3
-    internal var androidOS: Boolean = when (System.getProperty("java.vm.vendor").equals("The Android Project")) {
-        true -> {
-            build {
-                line(message, space(2), occurrence)
+    internal var printWhite = ::printWhiteLog
+    internal var printRed = ::printRedLog
+
+    init {
+        line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
+
+        when (System.getProperty("java.vm.vendor").equals("The Android Project")) {
+            true -> {
+                build {
+                    line(message, space(2), occurrence)
+                }
+                traceSteps = 4
+                printWhite = ::printOnAndroid
+                printRed = ::printOnAndroid
             }
-            traceSteps = 4
-            true
         }
-        false -> false
     }
+
     internal var exceptionFormat = Scope {
         indent {
             indent {
@@ -32,9 +41,9 @@ class LogFormat() : Scope() {
         children.clear()
         occurrenceOrTagUsed = false
         build()
-        for(i in children.indices) {
+        for (i in children.indices) {
             val child = children[i]
-            if(child is Scope && child.occurrenceOrTagUsed)
+            if (child is Scope && child.occurrenceOrTagUsed)
                 occurrenceOrTagUsed = true
         }
     }
