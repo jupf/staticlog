@@ -9,11 +9,6 @@ class LogFormat() : Scope() {
         line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
     }
 
-    constructor(build: LogFormat.() -> Unit) : this() {
-        children.clear()
-        build()
-    }
-
     internal var traceSteps = 3
     internal var androidOS: Boolean = when (System.getProperty("java.vm.vendor").equals("The Android Project")) {
         true -> {
@@ -33,8 +28,9 @@ class LogFormat() : Scope() {
         }
     }
 
-    fun build(build: LogFormat.() -> Unit) {
+    internal fun build(build: LogFormat.() -> Unit) {
         children.clear()
+        occurrenceOrTagUsed = false
         build()
     }
 }

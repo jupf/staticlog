@@ -12,7 +12,9 @@ open class Scope() : Builder {
         this.init()
     }
 
-    val children = arrayListOf<Builder>()
+    protected var occurrenceOrTagUsed = false
+
+    internal val children = arrayListOf<Builder>()
 
     val level: Builder
         get() = LevelBuilder()
@@ -21,10 +23,16 @@ open class Scope() : Builder {
         get() = MessageBuilder()
 
     val tag: Builder
-        get() = TagBuilder()
+        get() {
+            occurrenceOrTagUsed = true
+            return TagBuilder()
+        }
 
     val occurrence: Builder
-        get() = OccurrenceBuilder()
+        get() {
+            occurrenceOrTagUsed = true
+            return OccurrenceBuilder()
+        }
 
     val tab: Builder
         get() = TextBuilder("\t")
