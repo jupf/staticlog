@@ -18,39 +18,39 @@ internal object LogCore {
     val androidTag = TagBuilder()
 
 
-    fun info(log: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
+    fun info(message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
         if (logFormat.androidOS) {
-            printOnAndroid(LogLevel.INFO, log, tag, exception, trace, logFormat)
+            printOnAndroid(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
         } else
-            printWhiteLog(LogLevel.INFO, System.currentTimeMillis(), log, tag, exception, trace, logFormat)
+            printWhiteLog(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
     }
 
-    fun warn(log: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
+    fun warn(message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
         if (logFormat.androidOS) {
-            printOnAndroid(LogLevel.WARN, log, tag, exception, trace, logFormat)
+            printOnAndroid(LogLevel.WARN, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
         } else
-            printRedLog(LogLevel.WARN, System.currentTimeMillis(), log, tag, exception, trace, logFormat)
+            printRedLog(LogLevel.WARN, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
     }
 
-    fun error(log: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
+    fun error(message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
         if (logFormat.androidOS) {
-            printOnAndroid(LogLevel.ERROR, log, tag, exception, trace, logFormat)
+            printOnAndroid(LogLevel.ERROR, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
         } else
-            printRedLog(LogLevel.ERROR, System.currentTimeMillis(), log, tag, exception, trace, logFormat)
+            printRedLog(LogLevel.ERROR, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
     }
 
-    fun debug(log: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
+    fun debug(message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
         if (logFormat.androidOS) {
-            printOnAndroid(LogLevel.DEBUG, log, tag, exception, trace, logFormat)
+            printOnAndroid(LogLevel.DEBUG, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
         } else
-            printWhiteLog(LogLevel.DEBUG, System.currentTimeMillis(), log, tag, exception, trace, logFormat)
+            printWhiteLog(LogLevel.DEBUG, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
     }
 
-    private fun printOnAndroid(level: LogLevel, log: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
+    private fun printOnAndroid(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
         val builder = StringBuilder()
-        logFormat.buildString(level, 0L, log, tag, exception, builder, trace, "")
+        logFormat.buildString(level, time, message, tag, exception, builder, trace, "")
         val tagBuilder = StringBuilder()
-        androidTag.buildString(level, 0L, log, tag, exception, tagBuilder, trace, "")
+        androidTag.buildString(level, time, message, tag, exception, tagBuilder, trace, "")
 
         if (exception != null)
             when (level) {
