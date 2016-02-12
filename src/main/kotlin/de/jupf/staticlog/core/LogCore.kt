@@ -17,23 +17,35 @@ enum class LogLevel {
 internal val androidTag = TagBuilder()
 
 
-internal fun info(message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
-    logFormat.printWhite(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
+internal fun info(message: String, tag: String, exception: Exception?, logFormat: LogFormat) {
+    if (logFormat.occurrenceUsed || tag == "")
+        logFormat.printWhite(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, getTrace(logFormat), logFormat)
+    else
+        logFormat.printWhite(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, null, logFormat)
 }
 
-internal fun warn(message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
-    logFormat.printRed(LogLevel.WARN, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
+internal fun warn(message: String, tag: String, exception: Exception?, logFormat: LogFormat) {
+    if (logFormat.occurrenceUsed || tag == "")
+        logFormat.printRed(LogLevel.WARN, System.currentTimeMillis(), message, tag, exception, getTrace(logFormat), logFormat)
+    else
+        logFormat.printRed(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, null, logFormat)
 }
 
-internal fun error(message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
-    logFormat.printRed(LogLevel.ERROR, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
+internal fun error(message: String, tag: String, exception: Exception?, logFormat: LogFormat) {
+    if (logFormat.occurrenceUsed || tag == "")
+        logFormat.printRed(LogLevel.ERROR, System.currentTimeMillis(), message, tag, exception, getTrace(logFormat), logFormat)
+    else
+        logFormat.printRed(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, null, logFormat)
 }
 
-internal fun debug(message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
-    logFormat.printWhite(LogLevel.DEBUG, System.currentTimeMillis(), message, tag, exception, trace, logFormat)
+internal fun debug(message: String, tag: String, exception: Exception?, logFormat: LogFormat) {
+    if (logFormat.occurrenceUsed || tag == "")
+        logFormat.printWhite(LogLevel.DEBUG, System.currentTimeMillis(), message, tag, exception, getTrace(logFormat), logFormat)
+    else
+        logFormat.printWhite(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, null, logFormat)
 }
 
-internal fun printOnAndroid(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
+internal fun printOnAndroid(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?, trace: StackTraceElement?, logFormat: LogFormat) {
     val builder = StringBuilder()
     logFormat.buildString(level, time, message, tag, exception, builder, trace, "")
     val tagBuilder = StringBuilder()
@@ -55,14 +67,14 @@ internal fun printOnAndroid(level: LogLevel, time: Long, message: String, tag: S
         }
 }
 
-internal fun printWhiteLog(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
+internal fun printWhiteLog(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?, trace: StackTraceElement?, logFormat: LogFormat) {
     val builder = StringBuilder()
     logFormat.buildString(level, time, message, tag, exception, builder, trace, "")
     exception?.buildString(level, time, message, tag, builder, trace, logFormat)
     printFlush(builder)
 }
 
-internal fun printRedLog(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
+internal fun printRedLog(level: LogLevel, time: Long, message: String, tag: String, exception: Exception?, trace: StackTraceElement?, logFormat: LogFormat) {
     val builder = StringBuilder()
     logFormat.buildString(level, time, message, tag, exception, builder, trace, "")
     exception?.buildString(level, time, message, tag, builder, trace, logFormat)
@@ -84,6 +96,6 @@ internal fun printFlush(message: Any?) {
 }
 
 
-internal fun Throwable.buildString(level: LogLevel, time: Long, message: String, tag: String, builder: StringBuilder, trace: StackTraceElement, logFormat: LogFormat) {
+internal fun Throwable.buildString(level: LogLevel, time: Long, message: String, tag: String, builder: StringBuilder, trace: StackTraceElement?, logFormat: LogFormat) {
     logFormat.exceptionFormat.buildString(level, time, message, tag, this, builder, trace, "")
 }

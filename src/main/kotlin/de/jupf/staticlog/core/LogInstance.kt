@@ -32,8 +32,7 @@ open class LogInstance() : Logger {
      */
     override fun debug(message: String, tag: String, exception: Exception) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
-        val trace = getTrace(logFormat)
-        debug(message, tag, exception, trace, logFormat)
+        debug(message, tag, exception, logFormat)
     }
 
     /**
@@ -45,8 +44,7 @@ open class LogInstance() : Logger {
      */
     override fun debug(message: String, exception: Exception) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
-        val trace = getTrace(logFormat)
-        debug(message, "", exception, trace, logFormat)
+        debug(message, "", exception, logFormat)
     }
 
     /**
@@ -57,8 +55,7 @@ open class LogInstance() : Logger {
      */
     override fun debug(message: String, tag: String) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
-        val trace = getTrace(logFormat)
-        debug(message, tag, null, trace, logFormat)
+        debug(message, tag, null, logFormat)
     }
 
     /**
@@ -69,8 +66,7 @@ open class LogInstance() : Logger {
      */
     override fun debug(message: String) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
-        val trace = getTrace(logFormat)
-        debug(message, "", null, trace, logFormat)
+        debug(message, "", null, logFormat)
     }
 
     /**
@@ -82,8 +78,7 @@ open class LogInstance() : Logger {
      */
     override fun info(message: String, tag: String, exception: Exception) {
         if (!checkLogLevel(LogLevel.INFO)) return;
-        val trace = getTrace(logFormat)
-        info(message, tag, exception, trace, logFormat)
+        info(message, tag, exception, logFormat)
     }
 
     /**
@@ -95,8 +90,7 @@ open class LogInstance() : Logger {
      */
     override fun info(message: String, exception: Exception) {
         if (!checkLogLevel(LogLevel.INFO)) return;
-        val trace = getTrace(logFormat)
-        info(message, "", exception, trace, logFormat)
+        info(message, "", exception, logFormat)
     }
 
     /**
@@ -107,8 +101,7 @@ open class LogInstance() : Logger {
      */
     override fun info(message: String, tag: String) {
         if (!checkLogLevel(LogLevel.INFO)) return;
-        val trace = getTrace(logFormat)
-        info(message, tag, null, trace, logFormat)
+        info(message, tag, null, logFormat)
     }
 
     /**
@@ -119,8 +112,7 @@ open class LogInstance() : Logger {
      */
     override fun info(message: String) {
         if (!checkLogLevel(LogLevel.INFO)) return;
-        val trace = getTrace(logFormat)
-        info(message, "", null, trace, logFormat)
+        info(message, "", null, logFormat)
     }
 
     /**
@@ -132,8 +124,7 @@ open class LogInstance() : Logger {
      */
     override fun warn(message: String, tag: String, exception: Exception) {
         if (!checkLogLevel(LogLevel.WARN)) return
-        val trace = getTrace(logFormat)
-        warn(message, tag, exception, trace, logFormat)
+        warn(message, tag, exception, logFormat)
     }
 
     /**
@@ -145,8 +136,7 @@ open class LogInstance() : Logger {
      */
     override fun warn(message: String, exception: Exception) {
         if (!checkLogLevel(LogLevel.WARN)) return
-        val trace = getTrace(logFormat)
-        warn(message, "", exception, trace, logFormat)
+        warn(message, "", exception, logFormat)
     }
 
     /**
@@ -157,8 +147,7 @@ open class LogInstance() : Logger {
      */
     override fun warn(message: String, tag: String) {
         if (!checkLogLevel(LogLevel.WARN)) return
-        val trace = getTrace(logFormat)
-        warn(message, tag, null, trace, logFormat)
+        warn(message, tag, null, logFormat)
     }
 
     /**
@@ -169,8 +158,7 @@ open class LogInstance() : Logger {
      */
     override fun warn(message: String) {
         if (!checkLogLevel(LogLevel.WARN)) return
-        val trace = getTrace(logFormat)
-        warn(message, "", null, trace, logFormat)
+        warn(message, "", null, logFormat)
     }
 
     /**
@@ -181,8 +169,7 @@ open class LogInstance() : Logger {
      * @param exception The log-related exception
      */
     override fun error(message: String, tag: String, exception: Exception) {
-        val trace = getTrace(logFormat)
-        error(message, tag, exception, trace, logFormat)
+        error(message, tag, exception, logFormat)
     }
 
     /**
@@ -193,8 +180,7 @@ open class LogInstance() : Logger {
      * @param exception The log-related exception
      */
     override fun error(message: String, exception: Exception) {
-        val trace = getTrace(logFormat)
-        error(message, "", exception, trace, logFormat)
+        error(message, "", exception, logFormat)
     }
 
     /**
@@ -204,8 +190,7 @@ open class LogInstance() : Logger {
      * @param tag The tag the message is logged under
      */
     override fun error(message: String, tag: String) {
-        val trace = getTrace(logFormat)
-        error(message, tag, null, trace, logFormat)
+        error(message, tag, null, logFormat)
     }
 
     /**
@@ -215,8 +200,7 @@ open class LogInstance() : Logger {
      * @param message The log message
      */
     override fun error(message: String) {
-        val trace = getTrace(logFormat)
-        error(message, "", null, trace, logFormat)
+        error(message, "", null, logFormat)
     }
 
     /**
