@@ -25,7 +25,6 @@ internal object LogCore {
             printWhiteLog(LogLevel.INFO, System.currentTimeMillis(), log, tag, exception, trace, logFormat)
     }
 
-
     fun warn(log: String, tag: String, exception: Exception?, trace: StackTraceElement, logFormat: LogFormat) {
         if (logFormat.androidOS) {
             printOnAndroid(LogLevel.WARN, log, tag, exception, trace, logFormat)
@@ -51,7 +50,7 @@ internal object LogCore {
         val builder = StringBuilder()
         logFormat.buildString(level, 0L, log, tag, exception, builder, trace, "")
         val tagBuilder = StringBuilder()
-        androidTag.buildString(level,0L,log,tag,exception,tagBuilder,trace,"")
+        androidTag.buildString(level, 0L, log, tag, exception, tagBuilder, trace, "")
 
         if (exception != null)
             when (level) {
