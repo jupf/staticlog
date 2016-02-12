@@ -1,17 +1,18 @@
 # StaticLog
-StaticLog is a super lightweight logging library written in pure Kotlin. It is designed to be used in Kotlin, Java and Android.  
-It is for formatting standard output comfortably without the need to construct a Logger object. 
+StaticLog is a super lightweight logging library implemented in pure Kotlin. It is designed to be used in Kotlin, Java and Android.  
+It is for formatting standard output comfortably without the need to construct a Logger object. But it's also no problem to create one.  
 
 ## Table of Contents
-
 - [StaticLog](#staticlog)
 	- [StaticLog in Kotlin](#staticlog-in-kotlin)
 		- [Logging in Kotlin](#logging-in-kotlin)
 		- [Formatting Output in Kotlin](#formatting-output-in-kotlin)
+		- [Log instances in Kotlin](#log-instances-in-kotlin)
 		- [FormatBuilders in Kotlin](#formatbuilders-in-kotlin)
 	- [StaticLog in Java](#staticlog-in-java)
 		- [Logging in Java](#logging-in-java)
 		- [Formatting Output in Java](#formatting-output-in-java)
+		- [Log instances in Java](#log-instances-in-java)
 		- [FormatBuilders in Java](#formatbuilders-in-java)
 	- [StaticLog in Android](#staticlog-in-android)
 
@@ -32,18 +33,24 @@ Log.info("This message will not be shown")
 To define an output format for StaticLog in Kotlin is very easy. It uses a mix from builders and function call syntax.  
 This defines for example the default format:  
 ```kotlin
-Log.format {
+Log.newFormat {
     line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
 }
 ```
 You can even define multiple lines and indent them:  
 ```kotlin
-Log.format {
+Log.newFormat {
     line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), occurrence)
     indent {
         line(message)
     }
 }
+```
+### Log instances in Kotlin
+If you need another log instance you can create one very easy. It can have an own format and log level:
+```kotlin
+val logger = Log.kotlinInstance()
+logger.debug("This message is from an individual logger instance")
 ```
 ### FormatBuilders in Kotlin
 Here are all possible FormatBuilders: 
@@ -79,18 +86,24 @@ Log.info("This message will not be shown");
 To define an output format for StaticLog in Java is very easy.  
 This defines for example the default format:  
 ```java
-import static de.jupf.staticlog.Log.format.*;
+import static de.jupf.staticlog.Log.FormatOperations.*;
 
 ...
 
-Format format = Log.format.create();
+LogFormat format = Log.newFormat();
 format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), text("/"), tag(), space(2), message(), space(2), occurrence());
 ```
 You can even define multiple lines and indent them:  
 ```java
-format = Log.format.create();
+LogFormat format = Log.newFormat();
 format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), text("/"), tag(), space(2), occurrence());
 format.indent(line(message()));
+```
+### Log instances in Java
+If you need another log instance you can create one very easy. It can have an own log level and format:
+```Java
+Logger logger = Log.javaInstance();
+logger.debug("This message is from an individual logger instance");
 ```
 ### FormatBuilders in Java
 Here are all possible FormatBuilders:
@@ -111,7 +124,6 @@ Here are all possible FormatBuilders:
 StaticLog automatically detects Android VMs and switches its output to the Android logger.  
 The default format for Android is defined like this:  
 ```java
-Format format = Log.format.create();
 format.line(message(), space(2), occurrence());
 ```
 The tag is forwarded to the Android logger. If none is provided, it defaults to the class name the log was printed from.  
