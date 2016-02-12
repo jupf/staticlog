@@ -9,7 +9,7 @@ import de.jupf.staticlog.core.LogLevel
  * @author J.Pfeifer
  */
 fun main(args : Array<String>) {
-    Log.newFormat().build {
+    Log.newFormat {
          line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
     }
 
@@ -28,7 +28,7 @@ fun main(args : Array<String>) {
     Log.info("This message will not be shown")
 
     // multi-line format:
-    Log.newFormat().build {
+    Log.newFormat {
         line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), occurrence)
         indent {
             line(message)
