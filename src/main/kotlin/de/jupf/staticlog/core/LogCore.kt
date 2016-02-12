@@ -82,7 +82,6 @@ internal fun printRedLog(level: LogLevel, time: Long, message: String, tag: Stri
 }
 
 internal fun getTrace(logFormat: LogFormat): StackTraceElement {
-    println("getting trace")
     return Exception().stackTrace[logFormat.traceSteps]
 }
 
