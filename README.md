@@ -86,7 +86,7 @@ Log.info("This message will not be shown");
 To define an output format for StaticLog in Java is very easy.  
 This defines for example the default format:  
 ```java
-import static de.jupf.staticlog.Log.format.*;
+import static de.jupf.staticlog.Log.FormatOperations.*;
 
 ...
 
