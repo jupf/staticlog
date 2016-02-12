@@ -15,6 +15,7 @@ It is for formatting standard output comfortably without the need to construct a
 		- [Log instances in Java](#log-instances-in-java)
 		- [FormatBuilders in Java](#formatbuilders-in-java)
 	- [StaticLog in Android](#staticlog-in-android)
+
 ## StaticLog in Kotlin
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).
 ### Logging in Kotlin
