@@ -207,7 +207,7 @@ open class LogInstance() : Logger {
      * This function deletes the old LogFormat.
      * Then executes the given [build] function to create a new log format.
      */
-    fun format(build: LogFormat.() -> Unit) {
+    fun newFormat(build: LogFormat.() -> Unit) {
         logFormat.children.clear()
         logFormat.build()
     }
