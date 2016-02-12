@@ -33,13 +33,13 @@ Log.info("This message will not be shown")
 To define an output format for StaticLog in Kotlin is very easy. It uses a mix from builders and function call syntax.  
 This defines for example the default format:  
 ```kotlin
-Log.newFormat().build {
+Log.newFormat {
     line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
 }
 ```
 You can even define multiple lines and indent them:  
 ```kotlin
-Log.newFormat().build {
+Log.newFormat {
     line(date("yyyy-MM-dd HH:mm:ss"), space, level, text("/"), tag, space(2), occurrence)
     indent {
         line(message)
@@ -124,7 +124,6 @@ Here are all possible FormatBuilders:
 StaticLog automatically detects Android VMs and switches its output to the Android logger.  
 The default format for Android is defined like this:  
 ```java
-Format format = Log.format.create();
 format.line(message(), space(2), occurrence());
 ```
 The tag is forwarded to the Android logger. If none is provided, it defaults to the class name the log was printed from.  
