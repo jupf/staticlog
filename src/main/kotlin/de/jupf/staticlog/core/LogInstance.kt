@@ -208,8 +208,7 @@ open class LogInstance() : Logger {
      * Then executes the given [build] function to create a new log format.
      */
     fun newFormat(build: LogFormat.() -> Unit) {
-        logFormat.children.clear()
-        logFormat.build()
+        logFormat.build(build)
     }
 
     /**
@@ -220,6 +219,8 @@ open class LogInstance() : Logger {
      */
     override fun newFormat(): LogFormat {
         logFormat.children.clear()
+        logFormat.occurrenceUsed = false
+        logFormat.tagUsed = false
         return logFormat
     }
 

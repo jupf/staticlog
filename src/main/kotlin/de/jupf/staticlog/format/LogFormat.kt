@@ -40,11 +40,16 @@ class LogFormat() : Scope() {
     internal fun build(build: LogFormat.() -> Unit) {
         children.clear()
         occurrenceUsed = false
+        tagUsed = false
         build()
         for (i in children.indices) {
             val child = children[i]
-            if (child is Scope && child.occurrenceUsed)
-                occurrenceUsed = true
+            if (child is Scope) {
+                if (child.occurrenceUsed)
+                    occurrenceUsed = true
+                if(child.tagUsed)
+                    tagUsed = true
+            }
         }
     }
 }

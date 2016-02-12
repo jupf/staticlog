@@ -16,7 +16,7 @@ import de.jupf.staticlog.format.LogFormat
  * @created on 03.02.2016.
  */
 object Log {
-    val logInstance = LogInstance(3)
+    val logInstance = LogInstance(4)
     @JvmStatic var logLevel: LogLevel
         get() = logInstance.logLevel
         set(value) {
@@ -28,7 +28,7 @@ object Log {
      */
     @JvmStatic
     fun javaInstance(): Logger {
-        return LogInstance(2)
+        return LogInstance(3)
     }
 
     /**
@@ -36,7 +36,7 @@ object Log {
      */
     @JvmStatic
     fun kotlinInstance(): LogInstance {
-        return LogInstance(2)
+        return LogInstance(3)
     }
 
     /**
@@ -236,7 +236,7 @@ object Log {
     }
 
     fun newFormat(buildFun: LogFormat.() -> Unit) {
-        logInstance.newFormat().build(buildFun)
+        logInstance.newFormat(buildFun)
     }
 
     object FormatOperations {

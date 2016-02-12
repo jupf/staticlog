@@ -18,28 +18,28 @@ internal val androidTag = TagBuilder()
 
 
 internal fun info(message: String, tag: String, exception: Exception?, logFormat: LogFormat) {
-    if (logFormat.occurrenceUsed || tag == "")
+    if (logFormat.occurrenceUsed || (logFormat.tagUsed && tag == ""))
         logFormat.printWhite(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, getTrace(logFormat), logFormat)
     else
         logFormat.printWhite(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, null, logFormat)
 }
 
 internal fun warn(message: String, tag: String, exception: Exception?, logFormat: LogFormat) {
-    if (logFormat.occurrenceUsed || tag == "")
+    if (logFormat.occurrenceUsed || (logFormat.tagUsed && tag == ""))
         logFormat.printRed(LogLevel.WARN, System.currentTimeMillis(), message, tag, exception, getTrace(logFormat), logFormat)
     else
         logFormat.printRed(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, null, logFormat)
 }
 
 internal fun error(message: String, tag: String, exception: Exception?, logFormat: LogFormat) {
-    if (logFormat.occurrenceUsed || tag == "")
+    if (logFormat.occurrenceUsed || (logFormat.tagUsed && tag == ""))
         logFormat.printRed(LogLevel.ERROR, System.currentTimeMillis(), message, tag, exception, getTrace(logFormat), logFormat)
     else
         logFormat.printRed(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, null, logFormat)
 }
 
 internal fun debug(message: String, tag: String, exception: Exception?, logFormat: LogFormat) {
-    if (logFormat.occurrenceUsed || tag == "")
+    if (logFormat.occurrenceUsed || (logFormat.tagUsed && tag == ""))
         logFormat.printWhite(LogLevel.DEBUG, System.currentTimeMillis(), message, tag, exception, getTrace(logFormat), logFormat)
     else
         logFormat.printWhite(LogLevel.INFO, System.currentTimeMillis(), message, tag, exception, null, logFormat)
@@ -82,6 +82,7 @@ internal fun printRedLog(level: LogLevel, time: Long, message: String, tag: Stri
 }
 
 internal fun getTrace(logFormat: LogFormat): StackTraceElement {
+    println("getting trace")
     return Exception().stackTrace[logFormat.traceSteps]
 }
 
