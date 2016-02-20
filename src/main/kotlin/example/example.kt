@@ -41,5 +41,8 @@ fun main(args: Array<String>) {
     Thread.sleep(50)
 
     val logger = Log.kotlinInstance()
+    logger.newFormat {
+        line(message)
+    }
     logger.debug("This message is from an individual logger instance")
 }

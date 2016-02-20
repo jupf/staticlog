@@ -34,6 +34,7 @@ public class Example {
         Log.error("This is a multi-line log message");
 
         Logger logger = Log.javaInstance();
+        logger.newFormat().line(message());
         logger.debug("This message is from an individual logger instance");
     }
 }
