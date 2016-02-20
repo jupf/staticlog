@@ -47,7 +47,7 @@ class LogFormat() : Scope() {
             if (child is Scope) {
                 if (child.occurrenceUsed)
                     occurrenceUsed = true
-                if(child.tagUsed)
+                if (child.tagUsed)
                     tagUsed = true
             }
         }
