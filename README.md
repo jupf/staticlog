@@ -17,7 +17,8 @@ It is for formatting standard output comfortably without the need to construct a
 	- [StaticLog in Android](#staticlog-in-android)
 
 ## StaticLog in Kotlin
-You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).
+You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).  
+When the Kotlin Runtime is already present you should download [this](https://github.com/jupf/staticlog/releases/download/v2.0.0/staticlog-2.0.0.jar) jar.
 ### Logging in Kotlin
 Logging with StaticLog in Kotlin is as easy as it gets:
 ```kotlin
@@ -71,7 +72,8 @@ Here are all possible FormatBuilders:
 | text(S: String)  | Prints the String S |
 
 ## StaticLog in Java
-You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/java/example/Example.java).
+You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/java/example/Example.java).  
+When the Kotlin Runtime is __not__ already present you should download [this](https://github.com/jupf/staticlog/releases/download/v2.0.0/staticlog4java-2.0.0.jar) jar.
 ### Logging in Java
 Logging with StaticLog in Kotlin is as easy as it gets:
 ```java
