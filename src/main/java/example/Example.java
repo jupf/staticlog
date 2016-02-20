@@ -19,7 +19,6 @@ public class Example {
 
         Exception exception = new Exception("Exception text", new Exception("This is the cause"));
 
-
         Log.info("This is an info message");
         Log.debug("This is a debug message");
         Log.warn("This is a warning message", "WithACustomTag");
@@ -36,6 +35,5 @@ public class Example {
 
         Logger logger = Log.javaInstance();
         logger.debug("This message is from an individual logger instance");
-
     }
 }
