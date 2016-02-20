@@ -7,3 +7,6 @@ build
 *.iml
 out
 gen
+
+% jar manifest
+/src/main/kotlin/META-INF
