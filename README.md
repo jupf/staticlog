@@ -52,6 +52,7 @@ If you need another log instance you can create one very easy. It can have an ow
 val logger = Log.kotlinInstance()
 logger.debug("This message is from an individual logger instance")
 ```
+The interface of individual log instances is exactly the same as the interface for the static Log class.
 ### FormatBuilders in Kotlin
 Here are all possible FormatBuilders: 
 
@@ -105,6 +106,7 @@ If you need another log instance you can create one very easy. It can have an ow
 Logger logger = Log.javaInstance();
 logger.debug("This message is from an individual logger instance");
 ```
+The interface of individual log instances is exactly the same as the interface for the static Log class.
 ### FormatBuilders in Java
 Here are all possible FormatBuilders:
 
