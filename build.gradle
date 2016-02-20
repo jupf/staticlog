@@ -1,8 +1,8 @@
 group 'jupf'
-version '1.0.0'
+version '2.0.0'
 
 buildscript {
-    ext.kotlin_version = '1.0.0-rc-1036'
+    ext.kotlin_version = '1.0.0'
     ext.extraConfVersion = '3.0.3'
 
     repositories {
@@ -13,16 +13,19 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.netflix.nebula:gradle-extra-configurations-plugin:$extraConfVersion"
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.+"
     }
 }
 
 apply plugin: "kotlin"
+apply plugin: 'org.jetbrains.dokka'
 apply plugin: "nebula.provided-base"
 apply plugin: 'com.github.johnrengelman.shadow'
 
-
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+compileJava {
+    sourceCompatibility = "1.6"
+    targetCompatibility = "1.6"
+}
 
 repositories {
     mavenCentral()
@@ -49,3 +52,17 @@ shadowJar {
     }
     from { sourceSets.main.kotlin }
 }
+
+dokka {
+    outputDirectory = "$buildDir/docs/kdoc"
+}
+
+//dokka {
+//    outputDirectory = "$buildDir/docs/javadoc"
+//    outputFormat = 'javadoc'
+//}
+
+//task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+//    outputFormat = 'javadoc'
+//    outputDirectory = "$buildDir/javadoc"
+//}
