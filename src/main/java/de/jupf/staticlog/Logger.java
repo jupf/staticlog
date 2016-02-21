@@ -147,6 +147,19 @@ public interface Logger {
     void error(@NotNull String message);
 
     /**
+     * Sets a tag filter for this Logger.
+     * Only messages with this tag will be printed.
+     *
+     * @param filterTag
+     */
+    void setTagFilter(@NotNull String filterTag);
+
+    /**
+     * Deletes a previously set tag filter.
+     */
+    void deleteTagFilter();
+
+    /**
      * This method deletes the old LogFormat and
      * returns a handle to create the new format with.
      *
