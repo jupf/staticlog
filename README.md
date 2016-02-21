@@ -2,7 +2,7 @@
 StaticLog is a super lightweight logging library implemented in pure Kotlin ([https://kotlinlang.org/](https://kotlinlang.org/)). It is designed to be used in Kotlin, Java and Android.  
 It is for formatting standard output comfortably without the need to construct a Logger object. But it's also no problem to create one.  
   
-This is an example output in IntelliJ IDEA ([http://www.jetbrains.com/idea/](http://www.jetbrains.com/idea/))
+This is an example output in [IntelliJ IDEA](http://www.jetbrains.com/idea/)
 <a href="https://drive.google.com/uc?export=view&id=0B3Hm3TAXNccQaXN0eXc1R2daU2c"><img src="https://drive.google.com/uc?export=view&id=0B3Hm3TAXNccQaXN0eXc1R2daU2c" style="width: 800px; max-width: 100%; height: auto" title="Click for the larger version." /></a>  
 Yes, the occurrence of the log message is clickable!
 
