@@ -1,12 +1,9 @@
-# StaticLog  
-
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0-blue.svg) ](https://kotlinlang.org/) [![Dependency Status](https://www.versioneye.com/user/projects/56c9e5b818b2710494d79bc5/badge.svg)](https://www.versioneye.com/user/projects/56c9e5b818b2710494d79bc5) [![license](https://img.shields.io/badge/license-MIT-blue.svg) ](https://github.com/jupf/staticlog/blob/master/LICENSE)  
-
+# StaticLog [![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0-blue.svg) ](https://kotlinlang.org/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg) ](https://github.com/jupf/staticlog/blob/master/LICENSE) [![Dependency Status](https://www.versioneye.com/user/projects/56c9e5b818b2710494d79bc5/badge.svg)](https://www.versioneye.com/user/projects/56c9e5b818b2710494d79bc5)  
 StaticLog is a super lightweight logging library implemented in pure Kotlin ([https://kotlinlang.org/](https://kotlinlang.org/)). It is designed to be used in Kotlin, Java and Android.  
 It is for formatting standard output comfortably without the need to construct a Logger object. But it's also no problem to create one.  
   
 This is an example output in [IntelliJ IDEA](http://www.jetbrains.com/idea/)
-<a href="https://drive.google.com/uc?export=view&id=0B3Hm3TAXNccQQ29aRzY5Njhiamc"><img src="https://drive.google.com/uc?export=view&id=0B3Hm3TAXNccQQ29aRzY5Njhiamc" style="width: 800px; max-width: 100%; height: auto" title="Click for the larger version." /></a>  
+<a href="https://drive.google.com/uc?export=view&id=0B3Hm3TAXNccQVnRNODRDWDg2eFk"><img src="https://drive.google.com/uc?export=view&id=0B3Hm3TAXNccQVnRNODRDWDg2eFk" style="width: 500px; max-width: 100%; height: auto" title="Click for the larger version." /></a>  
 Yes, the occurrence of the log message is clickable!
 
 ## Table of Contents
