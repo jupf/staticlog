@@ -14,6 +14,17 @@ class LogFormat() : Scope() {
     internal var printWhite = ::printWhiteLog
     internal var printRed = ::printRedLog
 
+    internal var tagFilterUsed = false
+    internal var filterTag = "" // Only messages with this tag will be printed.
+        set(value) {
+            if(value == "") {
+                tagFilterUsed = false
+            } else {
+                tagFilterUsed = true
+                field = value
+            }
+        }
+
     init {
         line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
 
