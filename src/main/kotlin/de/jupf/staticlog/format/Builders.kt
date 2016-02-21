@@ -49,12 +49,7 @@ class DateBuilder(format: String) : Builder {
 
 class TagBuilder : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement?, indent: String) {
-        if (!tag.equals(""))
-            builder.append("$tag")
-        else {
-            val className = trace!!.className.split(".")
-            builder.append("${className[className.size - 1]}")
-        }
+        builder.append("$tag")
     }
 }
 
