@@ -33,10 +33,10 @@ internal fun error(message: String, tag: String = "", exception: Exception? = nu
 }
 
 internal fun printLogWhite(message: String, tag: String, exception: Exception?, logFormat: LogFormat, level: LogLevel) {
-    if(logFormat.occurrenceUsed || (logFormat.tagUsed && tag == "")) {
+    if(logFormat.occurrenceUsed || logFormat.tagFilterUsed || (logFormat.tagUsed && tag == "")) {
         val trace = getTrace(logFormat)
         var newTag = tag
-        if(logFormat.tagUsed && tag == "")
+        if(tag == "")
              newTag = getTraceTag(trace)
 
         logFormat.printWhite(level, System.currentTimeMillis(), message, newTag, exception, getTrace(logFormat), logFormat)
@@ -50,10 +50,10 @@ fun getTraceTag(trace: StackTraceElement): String {
 }
 
 internal fun printLogRed(message: String, tag: String, exception: Exception?, logFormat: LogFormat, level: LogLevel) {
-    if(logFormat.occurrenceUsed || (logFormat.tagUsed && tag == "")) {
+    if(logFormat.occurrenceUsed || logFormat.tagFilterUsed || (logFormat.tagUsed && tag == "")) {
         val trace = getTrace(logFormat)
         var newTag = tag
-        if(logFormat.tagUsed && tag == "")
+        if(tag == "")
             newTag = getTraceTag(trace)
 
         logFormat.printRed(level, System.currentTimeMillis(), message, newTag, exception, getTrace(logFormat), logFormat)

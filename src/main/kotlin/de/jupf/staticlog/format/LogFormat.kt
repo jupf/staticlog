@@ -51,7 +51,7 @@ class LogFormat() : Scope() {
     internal fun build(build: LogFormat.() -> Unit) {
         children.clear()
         occurrenceUsed = false
-        tagUsed = false
+        tagUsed = System.getProperty("java.vm.vendor").equals("The Android Project")
         build()
         for (i in children.indices) {
             val child = children[i]
