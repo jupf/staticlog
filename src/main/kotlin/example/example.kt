@@ -29,6 +29,15 @@ fun main(args: Array<String>) {
     Log.info("This message will not be shown")
     Thread.sleep(50)
 
+    Log.logLevel = LogLevel.INFO
+
+    Log.filterTag = "filterTag"
+    Log.info("This log will be filtered out")
+    Thread.sleep(50)
+    Log.info("This log has the right tag", "filterTag")
+    Thread.sleep(50)
+    Log.deleteTagFilter()
+
     // multi-line format:
     Log.newFormat {
         line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), occurrence)
