@@ -15,9 +15,14 @@ open class LogInstance() : Logger {
 
     protected val lock = ReentrantReadWriteLock()
 
-    val logFormat = LogFormat()
-    open var logLevel = LogLevel.DEBUG
+    val logFormat = LogFormat() // The defined log format for this logger
+    open var logLevel = LogLevel.DEBUG // Defines the minimum log level to print
         set(value) = lock.write { field = value }
+    var filterTag: String
+        get() = logFormat.filterTag
+        set(value) {
+            logFormat.filterTag = value
+        }
 
     constructor(needLongTrace: Int) : this() {
         logFormat.traceSteps = needLongTrace
@@ -204,11 +209,21 @@ open class LogInstance() : Logger {
     }
 
     /**
-     * This function deletes the old LogFormat.
-     * Then executes the given [build] function to create a new log format.
+     * Sets a tag filter for this Logger.
+     * Only messages with this tag will be printed.
+     *
+     * @param filterTag
      */
-    fun newFormat(build: LogFormat.() -> Unit) {
-        logFormat.build(build)
+    override fun setTagFilter(filterTag: String) {
+        logFormat.filterTag = filterTag
+        logFormat.tagFilterUsed = true
+    }
+
+    /**
+     * Deletes a previously set tag filter.
+     */
+    override fun deleteTagFilter() {
+        logFormat.tagFilterUsed = false
     }
 
     /**
@@ -222,6 +237,14 @@ open class LogInstance() : Logger {
         logFormat.occurrenceUsed = false
         logFormat.tagUsed = false
         return logFormat
+    }
+
+    /**
+     * This function deletes the old LogFormat.
+     * Then executes the given [build] function to create a new log format.
+     */
+    fun newFormat(build: LogFormat.() -> Unit) {
+        logFormat.build(build)
     }
 
     /**

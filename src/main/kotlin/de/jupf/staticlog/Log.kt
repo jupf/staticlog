@@ -16,11 +16,16 @@ import de.jupf.staticlog.format.LogFormat
  * @created on 03.02.2016.
  */
 object Log {
-    val logInstance = LogInstance(4)
+    val logInstance = LogInstance(5)
     @JvmStatic var logLevel: LogLevel
         get() = logInstance.logLevel
         set(value) {
             logInstance.logLevel = value
+        }
+    var filterTag: String
+        get() = logInstance.filterTag
+        set(value) {
+            logInstance.filterTag = value
         }
 
     /**
@@ -28,7 +33,7 @@ object Log {
      */
     @JvmStatic
     fun javaInstance(): Logger {
-        return LogInstance(3)
+        return LogInstance(4)
     }
 
     /**
@@ -36,7 +41,7 @@ object Log {
      */
     @JvmStatic
     fun kotlinInstance(): LogInstance {
-        return LogInstance(3)
+        return LogInstance(4)
     }
 
     /**
@@ -233,6 +238,25 @@ object Log {
     @JvmStatic
     fun newFormat(): LogFormat {
         return logInstance.newFormat()
+    }
+
+    /**
+     * Sets a tag filter for this Logger.
+     * Only messages with this tag will be printed.
+     *
+     * @param filterTag
+     */
+    @JvmStatic
+    fun setTagFilter(filterTag: String) {
+        logInstance.filterTag = filterTag
+    }
+
+    /**
+     * Deletes a previously set tag filter.
+     */
+    @JvmStatic
+    fun deleteTagFilter() {
+        logInstance.deleteTagFilter()
     }
 
     fun newFormat(buildFun: LogFormat.() -> Unit) {
