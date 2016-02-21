@@ -33,7 +33,7 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    provided 'com.google.android:android:2.2.1'
+    provided 'com.google.android:android:4.1.+'
 }
 
 //create a jar with sources
