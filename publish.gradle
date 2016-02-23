@@ -1,0 +1,60 @@
+artifacts {
+    archives jar
+    archives sourcesJar
+    archives shadowJar
+    archives sources4javaJar
+}
+
+def createPom = {
+    url siteUrl
+    licenses {
+        license {
+            name licenseName
+            url licenseUrl
+        }
+    }
+    developers {
+        developer {
+            id developerId
+            name developerName
+            email developerEmail
+        }
+    }
+    scm {
+        connection gitUrl
+        developerConnection gitUrl
+        url siteUrl
+
+    }
+}
+
+publishing {
+    publications {
+        staticlog(MavenPublication) {
+            groupId = rootProject.group
+            artifactId 'staticlog'
+            version = rootProject.version
+            pom.withXml {
+                asNode().appendNode('name', libraryName)
+                asNode().appendNode('description', libraryDescription)
+                asNode().children().last() + createPom
+            }
+
+            artifact jar
+            artifact sourcesJar
+        }
+        staticlogjava(MavenPublication) {
+            groupId = rootProject.group
+            artifactId 'staticlog-java'
+            version = rootProject.version
+            pom.withXml {
+                asNode().appendNode('name', libraryName)
+                asNode().appendNode('description', libraryDescription+' This version contains the Kotlin runtime.')
+                asNode().children().last() + createPom
+            }
+
+            artifact shadowJar
+            artifact sources4javaJar
+        }
+    }
+}

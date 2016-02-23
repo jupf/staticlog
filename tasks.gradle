@@ -1,0 +1,47 @@
+jar {
+    baseName = 'staticlog'
+}
+
+//create a jar with sources
+task sourcesJar(type: Jar) {
+    baseName = 'staticlog'
+    classifier = 'sources'
+    from { sourceSets.main.kotlin }
+}
+
+// create a jar with sources and
+shadowJar {
+    baseName = 'staticlog-java'
+    classifier = ''
+    dependencies {
+        include(dependency("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"))
+        include(dependency("org.jetbrains.kotlin:kotlin-runtime:$kotlin_version"))
+    }
+    from { sourceSets.main.kotlin }
+}
+
+task sources4javaJar(type: Jar) {
+    baseName = 'staticlog-java'
+    classifier = 'sources'
+    from { sourceSets.main.kotlin }
+}
+
+dokka {
+    outputDirectory = "$buildDir/docs/kdoc"
+}
+
+task dokkaJar(type: Jar, dependsOn: dokka) {
+    baseName = 'staticlog'
+    classifier = 'dokka'
+    from dokka.outputDirectory
+}
+
+//dokka {
+//    outputDirectory = "$buildDir/docs/javadoc"
+//    outputFormat = 'javadoc'
+//}
+
+//task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+//    outputFormat = 'javadoc'
+//    outputDirectory = "$buildDir/javadoc"
+//}

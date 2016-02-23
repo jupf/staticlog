@@ -1,6 +1,3 @@
-group 'jupf'
-version '2.0.0'
-
 buildscript {
     ext.kotlin_version = '1.0.0'
     ext.extraConfVersion = '3.0.3'
@@ -11,16 +8,25 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.netflix.nebula:gradle-extra-configurations-plugin:$extraConfVersion"
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.+"
+        classpath "com.netflix.nebula:gradle-extra-configurations-plugin:$extraConfVersion"
+
     }
+}
+
+plugins {
+    id "com.jfrog.bintray" version "1.6"
+    id "com.github.johnrengelman.shadow" version "1.2.3"
 }
 
 apply plugin: "kotlin"
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: "nebula.provided-base"
-apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+group 'io.github.jupf.staticlog'
+version '2.1.1'
 
 compileJava {
     sourceCompatibility = "1.6"
@@ -36,33 +42,30 @@ dependencies {
     provided 'com.google.android:android:4.1.+'
 }
 
-//create a jar with sources
-jar {
-    baseName = 'staticlog'
-    from { sourceSets.main.kotlin }
+rootProject.ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'staticlog'
+
+    libraryVersion = version
+
+    publishedGroupId = 'io.github.jupf.staticlog'
+    libraryName = 'StaticLog'
+    artifact = 'staticlog'
+
+    libraryDescription = 'Super lightweight static logging for Kotlin, Java and Android.'
+
+    siteUrl = 'https://github.com/jupf/staticlog'
+    gitUrl = 'https://github.com/jupf/staticlog.git'
+
+    developerId = 'jupf'
+    developerName = 'Julian Pfeifer'
+    developerEmail = 'julian.pfeifer.88@gmail.com'
+
+    licenseName = 'The MIT License (MIT)'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ["MIT"]
 }
 
-// create a jar with sources and
-shadowJar {
-    baseName = 'staticlog4java'
-    classifier = ''
-    dependencies {
-        include(dependency("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"))
-        include(dependency("org.jetbrains.kotlin:kotlin-runtime:$kotlin_version"))
-    }
-    from { sourceSets.main.kotlin }
-}
-
-dokka {
-    outputDirectory = "$buildDir/docs/kdoc"
-}
-
-//dokka {
-//    outputDirectory = "$buildDir/docs/javadoc"
-//    outputFormat = 'javadoc'
-//}
-
-//task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
-//    outputFormat = 'javadoc'
-//    outputDirectory = "$buildDir/javadoc"
-//}
+apply from: 'tasks.gradle'
+apply from: 'publish.gradle'
+apply from: 'bintray.gradle'
