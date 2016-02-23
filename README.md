@@ -1,4 +1,6 @@
-# StaticLog [![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0-blue.svg) ](https://kotlinlang.org/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg) ](https://github.com/jupf/staticlog/blob/master/LICENSE) [![Dependency Status](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86)  
+# StaticLog  
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0-blue.svg?style=flat) ](https://kotlinlang.org/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat) ](https://github.com/jupf/staticlog/blob/master/LICENSE) [![Dependency Status](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86/badge.svg)](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86) [ ![Download](https://api.bintray.com/packages/jupf/maven/staticlog/images/download.svg?style=flat) ](https://bintray.com/jupf/maven/staticlog/_latestVersion)  
+  
 StaticLog is a super lightweight logging library implemented in pure Kotlin ([https://kotlinlang.org](https://kotlinlang.org/)). It is designed to be used in Kotlin, Java and Android.  
 It is for formatting standard output comfortably without the need to construct a Logger object. But it's also no problem to create one.  
   
@@ -21,10 +23,10 @@ Yes, the occurrence of the log message is clickable!
 		- [Log instances in Java](#log-instances-in-java)
 		- [FormatBuilders in Java](#formatbuilders-in-java)
 	- [StaticLog in Android](#staticlog-in-android)
+	- [Which version do I need?](#which-version-do-i-need)
 
 ## StaticLog in Kotlin
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).  
-When the Kotlin Runtime is already present you should use the [staticlog-2.1.1.jar](https://github.com/jupf/staticlog/releases/download/v2.1.1/staticlog-2.1.1.jar).  
 
 ### Logging in Kotlin  
 
@@ -110,7 +112,6 @@ Here are all possible FormatBuilders:
 ## StaticLog in Java  
 
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/java/example/Example.java).  
-When the Kotlin Runtime is __not__ already present you should use the  [staticlog-java-2.1.1.jar](https://github.com/jupf/staticlog/releases/download/v2.1.1/staticlog-java-2.1.1.jar).  
 
 ### Logging in Java  
 
@@ -201,4 +202,9 @@ format.line(message(), space(2), occurrence());
 ```
 
 The tag is forwarded to the Android logger. If none is provided, it defaults to the class name the log was printed from.  
-For further questions look at [StaticLog in Java](#staticlog-in-java)
+For further questions look at [StaticLog in Java](#staticlog-in-java)  
+
+## Which version do I need?  
+
+If the Kotlin Runtime is __not__ already present in your project you should use the staticlog-java version (e.g. staticlog-java-2.1.1.jar). Everything you need is included in there.  
+If the Kotlin Runtime is already present you should use the normal staticlog version (e.g. staticlog-2.1.1.jar).
