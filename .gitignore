@@ -1,6 +1,7 @@
 # gradle cache/build files
 .gradle
 build
+local.properties
 
 # IntelliJ project files
 .idea
