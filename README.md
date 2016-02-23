@@ -1,4 +1,4 @@
-# StaticLog [![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0-blue.svg) ](https://kotlinlang.org/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg) ](https://github.com/jupf/staticlog/blob/master/LICENSE) [![Dependency Status](https://www.versioneye.com/user/projects/56c9e14c18b27104252dcca9/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56c9e14c18b27104252dcca9)  
+# StaticLog [![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0-blue.svg) ](https://kotlinlang.org/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg) ](https://github.com/jupf/staticlog/blob/master/LICENSE) [![Dependency Status](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86)  
 StaticLog is a super lightweight logging library implemented in pure Kotlin ([https://kotlinlang.org](https://kotlinlang.org/)). It is designed to be used in Kotlin, Java and Android.  
 It is for formatting standard output comfortably without the need to construct a Logger object. But it's also no problem to create one.  
   
