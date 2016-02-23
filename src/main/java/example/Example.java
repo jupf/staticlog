@@ -9,8 +9,9 @@ import static de.jupf.staticlog.Log.FormatOperations.*;
 
 
 /**
+ * Created on 21.12.2015
+ *
  * @author J.Pfeifer
- * @created 21.12.2015
  */
 public class Example {
     public static void main(String[] args) {

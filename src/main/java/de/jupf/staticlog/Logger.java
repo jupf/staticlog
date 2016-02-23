@@ -150,7 +150,7 @@ public interface Logger {
      * Sets a tag filter for this Logger.
      * Only messages with this tag will be printed.
      *
-     * @param filterTag
+     * @param filterTag every other tag then this will be filtered
      */
     void setTagFilter(@NotNull String filterTag);
 

@@ -3,6 +3,7 @@ artifacts {
     archives sourcesJar
     archives shadowJar
     archives sources4javaJar
+    archives javadocJar
 }
 
 def createPom = {
@@ -42,6 +43,7 @@ publishing {
 
             artifact jar
             artifact sourcesJar
+            artifact javadocJar
         }
         staticlogjava(MavenPublication) {
             groupId = rootProject.group
@@ -55,6 +57,8 @@ publishing {
 
             artifact shadowJar
             artifact sources4javaJar
+            artifact javadoc4javaJar
+
         }
     }
 }

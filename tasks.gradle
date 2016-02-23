@@ -26,6 +26,22 @@ task sources4javaJar(type: Jar) {
     from { sourceSets.main.kotlin }
 }
 
+//task javadoc(type: Javadoc) {
+//    source = sourceSets.main.java.srcDirs
+//}
+
+task javadocJar(type: Jar) {
+    baseName = 'staticlog'
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task javadoc4javaJar(type: Jar) {
+    baseName = 'staticlog-java'
+    classifier = 'javadoc'
+    from javadoc
+}
+
 dokka {
     outputDirectory = "$buildDir/docs/kdoc"
 }
