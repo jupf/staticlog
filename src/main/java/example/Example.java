@@ -36,7 +36,7 @@ public class Example {
             Log.setLogLevel(LogLevel.INFO);
 
             Log.setTagFilter("filterTag");
-            Log.info("This log will be filtered out");
+            Log.info("This log will be filtered out", "otherTag");
             Thread.sleep(50);
             Log.info("This log has the right tag", "filterTag");
             Thread.sleep(50);

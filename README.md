@@ -11,19 +11,23 @@ Yes, the occurrence of the log message is clickable!
 	- [StaticLog in Kotlin](#staticlog-in-kotlin)
 		- [Logging in Kotlin](#logging-in-kotlin)
 		- [Formatting Output in Kotlin](#formatting-output-in-kotlin)
+        - [Tag Filtering in Kotlin](#tag-filtering-in-kotlin)
 		- [Log instances in Kotlin](#log-instances-in-kotlin)
 		- [FormatBuilders in Kotlin](#formatbuilders-in-kotlin)
 	- [StaticLog in Java](#staticlog-in-java)
 		- [Logging in Java](#logging-in-java)
 		- [Formatting Output in Java](#formatting-output-in-java)
+		- [Tag Filtering in Java](#tag-filtering-in-java)
 		- [Log instances in Java](#log-instances-in-java)
 		- [FormatBuilders in Java](#formatbuilders-in-java)
 	- [StaticLog in Android](#staticlog-in-android)
 
 ## StaticLog in Kotlin
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).  
-When the Kotlin Runtime is already present you should download [this](https://github.com/jupf/staticlog/releases/download/v2.0.0/staticlog-2.0.0.jar) jar.
-### Logging in Kotlin
+When the Kotlin Runtime is already present you should download [this](https://github.com/jupf/staticlog/releases/download/v2.0.0/staticlog-2.0.0.jar) jar.  
+
+### Logging in Kotlin  
+
 Logging with StaticLog in Kotlin is as easy as it gets:
 ```kotlin
 Log.info("This is an info message")
@@ -34,7 +38,9 @@ Log.error("This is an error message with an additional Exception for output", "A
 Log.logLevel = LogLevel.WARN
 Log.info("This message will not be shown")
 ```
-### Formatting Output in Kotlin
+
+### Formatting Output in Kotlin  
+
 To define an output format for StaticLog in Kotlin is very easy. It uses a mix from builders and function call syntax.  
 This defines for example the default format:  
 ```kotlin
@@ -51,14 +57,31 @@ Log.newFormat {
     }
 }
 ```
-### Log instances in Kotlin
+
+### Tag Filtering in Kotlin  
+
+It is possible to filter the output for a specific tag. This is rather easy, just provide the tag:
+```kotlin
+Log.filterTag = "filterTag"
+Log.info("This log will be filtered out", "otherTag")
+Log.info("This log has the right tag", "filterTag")
+```
+Deleting a tag filter is just as easy:
+```kotlin
+Log.deleteTagFilter()
+```
+
+### Log instances in Kotlin  
+
 If you need another log instance you can create one very easy. It can have an own format and log level:
 ```kotlin
 val logger = Log.kotlinInstance()
 logger.debug("This message is from an individual logger instance")
 ```
-The interface of individual log instances is exactly the same as the interface for the static Log class.
-### FormatBuilders in Kotlin
+The interface of individual log instances is exactly the same as the interface for the static Log class.  
+
+### FormatBuilders in Kotlin  
+
 Here are all possible FormatBuilders: 
 
 | FormatBuilder   |     Output      |
@@ -75,10 +98,13 @@ Here are all possible FormatBuilders:
 | tab(X: Integer)  | Prints X tabs |
 | text(S: String)  | Prints the String S |
 
-## StaticLog in Java
+## StaticLog in Java  
+
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/java/example/Example.java).  
 When the Kotlin Runtime is __not__ already present you should download [this](https://github.com/jupf/staticlog/releases/download/v2.0.0/staticlog4java-2.0.0.jar) jar.
-### Logging in Java
+
+### Logging in Java  
+
 Logging with StaticLog in Kotlin is as easy as it gets:
 ```java
 Log.info("This is an info message");
@@ -89,7 +115,9 @@ Log.error("This is an error message with an additional Exception for output", "A
 Log.setLogLevel(LogLevel.WARN);
 Log.info("This message will not be shown");
 ```
-### Formatting Output in Java
+
+### Formatting Output in Java  
+
 To define an output format for StaticLog in Java is very easy.  
 This defines for example the default format:  
 ```java
@@ -106,14 +134,31 @@ LogFormat format = Log.newFormat();
 format.line(date("yyyy-MM-dd HH:mm:ss"), space(1), level(), text("/"), tag(), space(2), occurrence());
 format.indent(line(message()));
 ```
-### Log instances in Java
+
+### Tag Filtering in Java  
+
+It is possible to filter the output for a specific tag. This is rather easy, just provide the tag:
+```java
+Log.setTagFilter("filterTag");
+Log.info("This log will be filtered out", "otherTag");
+Log.info("This log has the right tag", "filterTag");
+```
+Deleting a tag filter is just as easy:
+```java
+Log.deleteTagFilter();
+```
+
+### Log instances in Java  
+
 If you need another log instance you can create one very easy. It can have an own log level and format:
 ```Java
 Logger logger = Log.javaInstance();
 logger.debug("This message is from an individual logger instance");
 ```
-The interface of individual log instances is exactly the same as the interface for the static Log class.
-### FormatBuilders in Java
+The interface of individual log instances is exactly the same as the interface for the static Log class.  
+
+### FormatBuilders in Java  
+
 Here are all possible FormatBuilders:
 
 | FormatBuilder   |     Output      |
@@ -128,7 +173,8 @@ Here are all possible FormatBuilders:
 | tab(X: Integer)  | Prints X tabs |
 | text(S: String)  | Prints the String S |
 
-## StaticLog in Android
+## StaticLog in Android  
+
 StaticLog automatically detects Android VMs and switches its output to the Android logger.  
 The default format for Android is defined like this:  
 ```java
