@@ -80,7 +80,8 @@ Log.deleteTagFilter()
 
 ### Log instances in Kotlin  
 
-If you need another log instance you can create one very easy. It can have an own format and log level:
+If you need another log instance you can create one very easy. It can have an own format and log level:  
+
 ```kotlin
 val logger = Log.kotlinInstance()
 logger.debug("This message is from an individual logger instance")
