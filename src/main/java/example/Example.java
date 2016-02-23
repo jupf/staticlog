@@ -47,7 +47,7 @@ public class Example {
             format.line(date("yyyy-MM-dd HH:mm:ss.SSS"), space(1), level(), text("/"), tag(), space(2), occurrence());
             format.indent(line(message()));
 
-            Log.info("This is a multi-line log message");
+            Log.error("This is a multi-line log message");
             Thread.sleep(50);
 
             Logger logger = Log.javaInstance();
