@@ -11,7 +11,7 @@ Yes, the occurrence of the log message is clickable!
 ## Table of Contents
 - [StaticLog](#staticlog)
 	- [Getting Started](#getting-started)
-		- [Gradle / Maven](#gradle-maven)
+		- [Gradle / Maven](#gradle--maven)
 	- [StaticLog in Kotlin](#staticlog-in-kotlin)
 		- [Logging in Kotlin](#logging-in-kotlin)
 		- [Formatting Output in Kotlin](#formatting-output-in-kotlin)
