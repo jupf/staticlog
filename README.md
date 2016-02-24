@@ -10,6 +10,8 @@ Yes, the occurrence of the log message is clickable!
 
 ## Table of Contents
 - [StaticLog](#staticlog)
+	- [Getting Started](#getting-started)
+		- [Gradle / Maven](#gradle-maven)
 	- [StaticLog in Kotlin](#staticlog-in-kotlin)
 		- [Logging in Kotlin](#logging-in-kotlin)
 		- [Formatting Output in Kotlin](#formatting-output-in-kotlin)
@@ -24,6 +26,43 @@ Yes, the occurrence of the log message is clickable!
 		- [FormatBuilders in Java](#formatbuilders-in-java)
 	- [StaticLog in Android](#staticlog-in-android)
 	- [Which version do I need?](#which-version-do-i-need)
+
+## Getting Started  
+
+The source/target compatibility is Java 1.6.
+
+### Gradle / Maven  
+
+```gradle
+dependencies {
+    compile 'io.github.jupf.staticlog:staticlog:2.1.2'
+}
+```
+
+```maven
+<dependency>
+    <groupId>io.github.jupf.staticlog</groupId>
+    <artifactId>staticlog</artifactId>
+    <version>2.1.2</version>
+</dependency>
+```
+
+If you ___dont___ have the Kotlin runtime already present in your project, use the following dependency. 
+
+```gradle
+dependencies {
+    compile 'io.github.jupf.staticlog:staticlog-java:2.1.2'
+}
+```
+
+```maven
+<dependency>
+    <groupId>io.github.jupf.staticlog</groupId>
+    <artifactId>staticlog-java</artifactId>
+    <version>2.1.2</version>
+</dependency>
+```
+
 
 ## StaticLog in Kotlin
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).  
