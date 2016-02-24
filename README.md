@@ -38,7 +38,7 @@ dependencies {
 }
 ```
 
-```maven
+```xml
 <dependency>
     <groupId>io.github.jupf.staticlog</groupId>
     <artifactId>staticlog</artifactId>
@@ -54,7 +54,7 @@ dependencies {
 }
 ```
 
-```maven
+```xml
 <dependency>
     <groupId>io.github.jupf.staticlog</groupId>
     <artifactId>staticlog-java</artifactId>
