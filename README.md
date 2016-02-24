@@ -28,7 +28,8 @@ Yes, the occurrence of the log message is clickable!
 
 ## Getting Started  
 
-The source/target compatibility is Java 1.6.
+The source/target compatibility is Java 1.6.  
+This library is uploaded to jcenter and Maven Central.
 
 ### Gradle / Maven  
 
