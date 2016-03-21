@@ -10,6 +10,8 @@ Yes, the occurrence of the log message is clickable!
 
 ## Table of Contents
 - [StaticLog](#staticlog)
+	- [Getting Started](#getting-started)
+		- [Gradle / Maven](#gradle--maven)
 	- [StaticLog in Kotlin](#staticlog-in-kotlin)
 		- [Logging in Kotlin](#logging-in-kotlin)
 		- [Formatting Output in Kotlin](#formatting-output-in-kotlin)
@@ -23,7 +25,44 @@ Yes, the occurrence of the log message is clickable!
 		- [Log instances in Java](#log-instances-in-java)
 		- [FormatBuilders in Java](#formatbuilders-in-java)
 	- [StaticLog in Android](#staticlog-in-android)
-	- [Which version do I need?](#which-version-do-i-need)
+
+## Getting Started  
+
+The source/target compatibility is Java 1.6.  
+This library is uploaded to jCenter and Maven Central.
+
+### Gradle / Maven  
+
+```gradle
+dependencies {
+    compile 'io.github.jupf.staticlog:staticlog:2.1.2'
+}
+```
+
+```xml
+<dependency>
+    <groupId>io.github.jupf.staticlog</groupId>
+    <artifactId>staticlog</artifactId>
+    <version>2.1.2</version>
+</dependency>
+```
+
+If you ___dont___ have the Kotlin runtime already present in your project, use the following dependency. 
+
+```gradle
+dependencies {
+    compile 'io.github.jupf.staticlog:staticlog-java:2.1.2'
+}
+```
+
+```xml
+<dependency>
+    <groupId>io.github.jupf.staticlog</groupId>
+    <artifactId>staticlog-java</artifactId>
+    <version>2.1.2</version>
+</dependency>
+```
+
 
 ## StaticLog in Kotlin
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/kotlin/example/example.kt).  
@@ -203,8 +242,3 @@ format.line(message(), space(2), occurrence());
 
 The tag is forwarded to the Android logger. If none is provided, it defaults to the class name the log was printed from.  
 For further questions look at [StaticLog in Java](#staticlog-in-java)  
-
-## Which version do I need?  
-
-If the Kotlin Runtime is __not__ already present in your project you should use the staticlog-java version (e.g. staticlog-java-2.1.1.jar). Everything you need is included in there.  
-If the Kotlin Runtime is already present you should use the normal staticlog version (e.g. staticlog-2.1.1.jar).
