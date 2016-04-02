@@ -35,7 +35,7 @@ This library is uploaded to jCenter and Maven Central.
 
 ```gradle
 dependencies {
-    compile 'io.github.jupf.staticlog:staticlog:2.1.3'
+    compile 'io.github.jupf.staticlog:staticlog:2.1.4'
 }
 ```
 
@@ -43,7 +43,7 @@ dependencies {
 <dependency>
     <groupId>io.github.jupf.staticlog</groupId>
     <artifactId>staticlog</artifactId>
-    <version>2.1.3</version>
+    <version>2.1.4</version>
 </dependency>
 ```
 
