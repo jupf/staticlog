@@ -1,17 +1,14 @@
 package de.jupf.staticlog.core
 
-import de.jupf.staticlog.Logger
 import de.jupf.staticlog.format.LogFormat
-import java.io.File
-
 
 /**
  * @author J.Pfeifer
  * @created 19.01.2016
  */
-class LogInstance() : Logger {
-    val logFormat = LogFormat() // The defined log format for this logger
-    override var logLevel = LogLevel.DEBUG // Defines the minimum log level to print
+class Logger() {
+    internal val logFormat = LogFormat() // The defined log format for this logger
+    var logLevel = LogLevel.DEBUG // Defines the minimum log level to print
     var filterTag: String
         get() = logFormat.filterTag
         set(value) {
@@ -29,7 +26,7 @@ class LogInstance() : Logger {
      * @param tag The tag the message is logged under
      * @param throwable The log-related throwable
      */
-    override fun debug(message: String, tag: String, throwable: Throwable) {
+    fun debug(message: String, tag: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
         print(LogLevel.DEBUG, message, tag, throwable)
     }
@@ -41,7 +38,7 @@ class LogInstance() : Logger {
      * @param message The log message
      * @param throwable The log-related throwable
      */
-    override fun debug(message: String, throwable: Throwable) {
+    fun debug(message: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
         print(LogLevel.DEBUG, message, "", throwable)
     }
@@ -52,7 +49,7 @@ class LogInstance() : Logger {
      * @param message The log message
      * @param tag The tag the message is logged under
      */
-    override fun debug(message: String, tag: String) {
+    fun debug(message: String, tag: String) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
         print(LogLevel.DEBUG, message, tag, null)
     }
@@ -63,7 +60,7 @@ class LogInstance() : Logger {
      *
      * @param message The log message
      */
-    override fun debug(message: String) {
+    fun debug(message: String) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
         print(LogLevel.DEBUG, message, "", null)
     }
@@ -75,7 +72,7 @@ class LogInstance() : Logger {
      * @param tag The tag the message is logged under
      * @param throwable The log-related throwable
      */
-    override fun info(message: String, tag: String, throwable: Throwable) {
+    fun info(message: String, tag: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.INFO)) return;
         print(LogLevel.INFO, message, tag, throwable)
     }
@@ -87,7 +84,7 @@ class LogInstance() : Logger {
      * @param message The log message
      * @param throwable The log-related throwable
      */
-    override fun info(message: String, throwable: Throwable) {
+    fun info(message: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.INFO)) return;
         print(LogLevel.INFO, message, "", throwable)
     }
@@ -98,7 +95,7 @@ class LogInstance() : Logger {
      * @param message The log message
      * @param tag The tag the message is logged under
      */
-    override fun info(message: String, tag: String) {
+    fun info(message: String, tag: String) {
         if (!checkLogLevel(LogLevel.INFO)) return;
         print(LogLevel.INFO, message, tag, null)
     }
@@ -109,7 +106,7 @@ class LogInstance() : Logger {
      *
      * @param message The log message
      */
-    override fun info(message: String) {
+    fun info(message: String) {
         if (!checkLogLevel(LogLevel.INFO)) return;
         print(LogLevel.INFO, message, "", null)
     }
@@ -121,7 +118,7 @@ class LogInstance() : Logger {
      * @param tag The tag the message is logged under
      * @param throwable The log-related throwable
      */
-    override fun warn(message: String, tag: String, throwable: Throwable) {
+    fun warn(message: String, tag: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.WARN)) return
         print(LogLevel.WARN, message, tag, throwable)
     }
@@ -133,7 +130,7 @@ class LogInstance() : Logger {
      * @param message The log message
      * @param throwable The log-related throwable
      */
-    override fun warn(message: String, throwable: Throwable) {
+    fun warn(message: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.WARN)) return
         print(LogLevel.WARN, message, "", throwable)
     }
@@ -144,7 +141,7 @@ class LogInstance() : Logger {
      * @param message The log message
      * @param tag The tag the message is logged under
      */
-    override fun warn(message: String, tag: String) {
+    fun warn(message: String, tag: String) {
         if (!checkLogLevel(LogLevel.WARN)) return
         print(LogLevel.WARN, message, tag, null)
     }
@@ -155,7 +152,7 @@ class LogInstance() : Logger {
      *
      * @param message The log message
      */
-    override fun warn(message: String) {
+    fun warn(message: String) {
         if (!checkLogLevel(LogLevel.WARN)) return
         print(LogLevel.WARN, message, "", null)
     }
@@ -167,7 +164,7 @@ class LogInstance() : Logger {
      * @param tag The tag the message is logged under
      * @param throwable The log-related throwable
      */
-    override fun error(message: String, tag: String, throwable: Throwable) {
+    fun error(message: String, tag: String, throwable: Throwable) {
         print(LogLevel.ERROR, message, tag, throwable)
     }
 
@@ -178,7 +175,7 @@ class LogInstance() : Logger {
      * @param message The log message
      * @param throwable The log-related throwable
      */
-    override fun error(message: String, throwable: Throwable) {
+    fun error(message: String, throwable: Throwable) {
         print(LogLevel.ERROR, message, "", throwable)
     }
 
@@ -188,7 +185,7 @@ class LogInstance() : Logger {
      * @param message The log message
      * @param tag The tag the message is logged under
      */
-    override fun error(message: String, tag: String) {
+    fun error(message: String, tag: String) {
         print(LogLevel.ERROR, message, tag, null)
     }
 
@@ -198,7 +195,7 @@ class LogInstance() : Logger {
      *
      * @param message The log message
      */
-    override fun error(message: String) {
+    fun error(message: String) {
         print(LogLevel.ERROR, message, "", null)
     }
 
@@ -208,7 +205,7 @@ class LogInstance() : Logger {
      *
      * @param filterTag
      */
-    override fun setTagFilter(filterTag: String) {
+    fun setTagFilter(filterTag: String) {
         logFormat.filterTag = filterTag
         logFormat.tagFilterUsed = true
     }
@@ -216,7 +213,7 @@ class LogInstance() : Logger {
     /**
      * Deletes a previously set tag filter.
      */
-    override fun deleteTagFilter() {
+    fun deleteTagFilter() {
         logFormat.tagFilterUsed = false
     }
 
@@ -226,7 +223,7 @@ class LogInstance() : Logger {
      *
      * @return log format handle
      */
-    override fun newFormat(): LogFormat {
+    fun newFormat(): LogFormat {
         logFormat.children.clear()
         logFormat.occurrenceUsed = false
         logFormat.tagUsed = false

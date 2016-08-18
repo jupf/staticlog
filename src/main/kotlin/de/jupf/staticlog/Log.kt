@@ -2,7 +2,7 @@
 
 package de.jupf.staticlog
 
-import de.jupf.staticlog.core.LogInstance
+import de.jupf.staticlog.core.Logger
 import de.jupf.staticlog.core.LogLevel
 import de.jupf.staticlog.format.Builder
 import de.jupf.staticlog.format.Indent
@@ -16,7 +16,7 @@ import de.jupf.staticlog.format.LogFormat
  * @created on 03.02.2016.
  */
 object Log {
-    internal val logInstance = LogInstance(4)
+    internal val logInstance = Logger(4)
     @JvmStatic var logLevel: LogLevel
         get() = logInstance.logLevel
         set(value) {
@@ -31,15 +31,15 @@ object Log {
      */
     @JvmStatic
     fun javaInstance(): Logger {
-        return LogInstance(4)
+        return Logger(4)
     }
 
     /**
      * Returns a logger instance for kotlin
      */
     @JvmStatic
-    fun kotlinInstance(): LogInstance {
-        return LogInstance(3)
+    fun kotlinInstance(): Logger {
+        return Logger(3)
     }
 
     /**
