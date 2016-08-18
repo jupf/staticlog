@@ -15,45 +15,45 @@ public interface Logger {
      *
      * @param message The log message
      * @param tag The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    void debug(@NotNull String message, @NotNull String tag, @NotNull Exception exception);
+    void debug(@NotNull String message, @NotNull String tag, @NotNull Throwable throwable);
 
     /**
      * Logs an info message.
      *
      * @param message The log message
      * @param tag The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    void info(@NotNull String message, @NotNull String tag, @NotNull Exception exception);
+    void info(@NotNull String message, @NotNull String tag, @NotNull Throwable throwable);
 
     /**
      * Logs a warning message.
      *
      * @param message The log message
      * @param tag The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    void warn(@NotNull String message, @NotNull String tag, @NotNull Exception exception);
+    void warn(@NotNull String message, @NotNull String tag, @NotNull Throwable throwable);
 
     /**
      * Logs an error message.
      *
      * @param message The log message
      * @param tag The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    void error(@NotNull String message, @NotNull String tag, @NotNull Exception exception);
+    void error(@NotNull String message, @NotNull String tag, @NotNull Throwable throwable);
 
     /**
      * Logs a debug message.
      * The tag will default to the class name the log is created from.
      *
      * @param message The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    void debug(@NotNull String message, @NotNull Exception exception);
+    void debug(@NotNull String message, @NotNull Throwable throwable);
 
     /**
      * Logs a debug message.
@@ -76,9 +76,9 @@ public interface Logger {
      * The tag will default to the class name the log is created from.
      *
      * @param message The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    void info(@NotNull String message, @NotNull Exception exception);
+    void info(@NotNull String message, @NotNull Throwable throwable);
 
     /**
      * Logs an info message.
@@ -101,9 +101,9 @@ public interface Logger {
      * The tag will default to the class name the log is created from.
      *
      * @param message The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    void warn(@NotNull String message, @NotNull Exception exception);
+    void warn(@NotNull String message, @NotNull Throwable throwable);
 
     /**
      * Logs a warning message.
@@ -126,9 +126,9 @@ public interface Logger {
      * The tag will default to the class name the log is created from.
      *
      * @param message The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    void error(@NotNull String message, @NotNull Exception exception);
+    void error(@NotNull String message, @NotNull Throwable throwable);
 
     /**
      * Logs an error message.

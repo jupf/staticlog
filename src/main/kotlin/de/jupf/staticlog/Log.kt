@@ -16,7 +16,7 @@ import de.jupf.staticlog.format.LogFormat
  * @created on 03.02.2016.
  */
 object Log {
-    val logInstance = LogInstance(5)
+    val logInstance = LogInstance(4)
     @JvmStatic var logLevel: LogLevel
         get() = logInstance.logLevel
         set(value) {
@@ -24,9 +24,7 @@ object Log {
         }
     var filterTag: String
         get() = logInstance.filterTag
-        set(value) {
-            logInstance.filterTag = value
-        }
+        set(value) { logInstance.filterTag = value }
 
     /**
      * Returns a logger instance for Java
@@ -41,7 +39,7 @@ object Log {
      */
     @JvmStatic
     fun kotlinInstance(): LogInstance {
-        return LogInstance(4)
+        return LogInstance(3)
     }
 
     /**
@@ -49,11 +47,11 @@ object Log {
      *
      * @param message   The log message
      * @param tag       The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
     @JvmStatic
-    fun debug(message: String, tag: String, exception: Exception) {
-        logInstance.debug(message, tag, exception)
+    fun debug(message: String, tag: String, throwable: Throwable) {
+        logInstance.debug(message, tag, throwable)
     }
 
     /**
@@ -61,11 +59,11 @@ object Log {
      * The tag will default to the class name the log is created from.
      *
      * @param message   The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
     @JvmStatic
-    fun debug(message: String, exception: Exception) {
-        logInstance.debug(message, exception)
+    fun debug(message: String, throwable: Throwable) {
+        logInstance.debug(message, throwable)
     }
 
     /**
@@ -95,11 +93,11 @@ object Log {
      *
      * @param message   The log message
      * @param tag       The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
     @JvmStatic
-    fun info(message: String, tag: String, exception: Exception) {
-        logInstance.info(message, tag, exception)
+    fun info(message: String, tag: String, throwable: Throwable) {
+        logInstance.info(message, tag, throwable)
     }
 
     /**
@@ -107,11 +105,11 @@ object Log {
      * The tag will default to the class name the log is created from.
      *
      * @param message   The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
     @JvmStatic
-    fun info(message: String, exception: Exception) {
-        logInstance.info(message, exception)
+    fun info(message: String, throwable: Throwable) {
+        logInstance.info(message, throwable)
     }
 
     /**
@@ -141,11 +139,11 @@ object Log {
      *
      * @param message   The log message
      * @param tag       The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
     @JvmStatic
-    fun warn(message: String, tag: String, exception: Exception) {
-        logInstance.warn(message, tag, exception)
+    fun warn(message: String, tag: String, throwable: Throwable) {
+        logInstance.warn(message, tag, throwable)
     }
 
     /**
@@ -153,11 +151,11 @@ object Log {
      * The tag will default to the class name the log is created from.
      *
      * @param message   The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
     @JvmStatic
-    fun warn(message: String, exception: Exception) {
-        logInstance.warn(message, exception)
+    fun warn(message: String, throwable: Throwable) {
+        logInstance.warn(message, throwable)
     }
 
     /**
@@ -188,11 +186,11 @@ object Log {
      *
      * @param message   The log message
      * @param tag       The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
     @JvmStatic
-    fun error(message: String, tag: String, exception: Exception) {
-        logInstance.error(message, tag, exception)
+    fun error(message: String, tag: String, throwable: Throwable) {
+        logInstance.error(message, tag, throwable)
     }
 
     /**
@@ -200,11 +198,11 @@ object Log {
      * The tag will default to the class name the log is created from.
      *
      * @param message   The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
     @JvmStatic
-    fun error(message: String, exception: Exception) {
-        logInstance.error(message, exception)
+    fun error(message: String, throwable: Throwable) {
+        logInstance.error(message, throwable)
     }
 
     /**

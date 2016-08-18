@@ -1,6 +1,7 @@
 package de.jupf.staticlog.format
 
 import de.jupf.staticlog.core.LogLevel
+import java.util.concurrent.CopyOnWriteArrayList
 
 /**
  * @author J.Pfeifer
@@ -15,7 +16,7 @@ open class Scope() : Builder {
     internal var occurrenceUsed = false
     internal var tagUsed = false
 
-    internal val children = arrayListOf<Builder>()
+    internal val children = CopyOnWriteArrayList<Builder>()
 
     val level: Builder
         get() = LevelBuilder()
@@ -103,8 +104,8 @@ open class Scope() : Builder {
     }
 
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement?, indent: String) {
-        for (i in children.indices) {
-            children[i].buildString(logLevel, time, message, tag, exception, builder, trace, indent)
+        for (child in children) {
+            child.buildString(logLevel, time, message, tag, exception, builder, trace, indent)
         }
     }
 
@@ -119,8 +120,8 @@ class Line : Scope() {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement?, indent: String) {
         if (!indent.equals(""))
             builder.append(indent)
-        for (i in children.indices) {
-            children[i].buildString(logLevel, time, message, tag, exception, builder, trace, indent)
+        for (child in children) {
+            child.buildString(logLevel, time, message, tag, exception, builder, trace, indent)
         }
 
         builder.appendln()
@@ -129,8 +130,8 @@ class Line : Scope() {
 
 class Indent : Scope() {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement?, indent: String) {
-        for (i in children.indices) {
-            children[i].buildString(logLevel, time, message, tag, exception, builder, trace, indent + "   ")
+        for (child in children) {
+            child.buildString(logLevel, time, message, tag, exception, builder, trace, indent + "   ")
         }
     }
 }

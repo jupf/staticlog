@@ -1,8 +1,11 @@
 package de.jupf.staticlog.format
 
-import de.jupf.staticlog.core.printOnAndroid
-import de.jupf.staticlog.core.printRedLog
-import de.jupf.staticlog.core.printWhiteLog
+import de.jupf.staticlog.core.LogLevel
+import de.jupf.staticlog.printer.AndroidPrinter
+import de.jupf.staticlog.printer.DesktopPrinter
+import de.jupf.staticlog.printer.Printer
+import java.io.FileOutputStream
+import java.util.*
 
 /**
  * @author J.Pfeifer
@@ -11,8 +14,7 @@ import de.jupf.staticlog.core.printWhiteLog
 class LogFormat() : Scope() {
 
     internal var traceSteps = 3
-    internal var printWhite = ::printWhiteLog
-    internal var printRed = ::printRedLog
+    internal val printer: MutableList<Printer> = ArrayList()
 
     internal var tagFilterUsed = false
     internal var filterTag = "" // Only messages with this tag will be printed.
@@ -34,9 +36,9 @@ class LogFormat() : Scope() {
                     line(message, space(2), occurrence)
                 }
                 traceSteps = 4
-                printWhite = ::printOnAndroid
-                printRed = ::printOnAndroid
+                printer.add(AndroidPrinter())
             }
+            else -> printer.add(DesktopPrinter())
         }
     }
 
@@ -46,6 +48,10 @@ class LogFormat() : Scope() {
                 line(exception)
             }
         }
+    }
+
+    internal fun print(level: LogLevel, time: Long, message: String, tag: String = "", throwable: Throwable? = null, traceElement: StackTraceElement?) {
+        printer.forEach { it.print(level,time,message,tag,throwable,traceElement,this) }
     }
 
     internal fun build(build: LogFormat.() -> Unit) {
@@ -63,4 +69,6 @@ class LogFormat() : Scope() {
             }
         }
     }
+
+
 }

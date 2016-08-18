@@ -2,9 +2,7 @@ package de.jupf.staticlog.core
 
 import de.jupf.staticlog.Logger
 import de.jupf.staticlog.format.LogFormat
-import java.util.concurrent.locks.ReentrantReadWriteLock
-import kotlin.concurrent.read
-import kotlin.concurrent.write
+import java.io.File
 
 
 /**
@@ -13,11 +11,8 @@ import kotlin.concurrent.write
  */
 open class LogInstance() : Logger {
 
-    protected val lock = ReentrantReadWriteLock()
-
     val logFormat = LogFormat() // The defined log format for this logger
-    open var logLevel = LogLevel.DEBUG // Defines the minimum log level to print
-        set(value) = lock.write { field = value }
+    var logLevel = LogLevel.DEBUG // Defines the minimum log level to print
     var filterTag: String
         get() = logFormat.filterTag
         set(value) {
@@ -33,11 +28,11 @@ open class LogInstance() : Logger {
      *
      * @param message The log message
      * @param tag The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    override fun debug(message: String, tag: String, exception: Exception) {
+    override fun debug(message: String, tag: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
-        debug(message, tag, exception, logFormat)
+        print(LogLevel.DEBUG, message, tag, throwable)
     }
 
     /**
@@ -45,11 +40,11 @@ open class LogInstance() : Logger {
      * The tag will default to the class name the log is created from.
      *
      * @param message The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    override fun debug(message: String, exception: Exception) {
+    override fun debug(message: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
-        debug(message, "", exception, logFormat)
+        print(LogLevel.DEBUG, message, "", throwable)
     }
 
     /**
@@ -60,7 +55,7 @@ open class LogInstance() : Logger {
      */
     override fun debug(message: String, tag: String) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
-        debug(message, tag, null, logFormat)
+        print(LogLevel.DEBUG, message, tag, null)
     }
 
     /**
@@ -71,7 +66,7 @@ open class LogInstance() : Logger {
      */
     override fun debug(message: String) {
         if (!checkLogLevel(LogLevel.DEBUG)) return
-        debug(message, "", null, logFormat)
+        print(LogLevel.DEBUG, message, "", null)
     }
 
     /**
@@ -79,11 +74,11 @@ open class LogInstance() : Logger {
      *
      * @param message The log message
      * @param tag The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    override fun info(message: String, tag: String, exception: Exception) {
+    override fun info(message: String, tag: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.INFO)) return;
-        info(message, tag, exception, logFormat)
+        print(LogLevel.INFO, message, tag, throwable)
     }
 
     /**
@@ -91,11 +86,11 @@ open class LogInstance() : Logger {
      * The tag will default to the class name the log is created from.
      *
      * @param message The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    override fun info(message: String, exception: Exception) {
+    override fun info(message: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.INFO)) return;
-        info(message, "", exception, logFormat)
+        print(LogLevel.INFO, message, "", throwable)
     }
 
     /**
@@ -106,7 +101,7 @@ open class LogInstance() : Logger {
      */
     override fun info(message: String, tag: String) {
         if (!checkLogLevel(LogLevel.INFO)) return;
-        info(message, tag, null, logFormat)
+        print(LogLevel.INFO, message, tag, null)
     }
 
     /**
@@ -117,7 +112,7 @@ open class LogInstance() : Logger {
      */
     override fun info(message: String) {
         if (!checkLogLevel(LogLevel.INFO)) return;
-        info(message, "", null, logFormat)
+        print(LogLevel.INFO, message, "", null)
     }
 
     /**
@@ -125,11 +120,11 @@ open class LogInstance() : Logger {
      *
      * @param message The log message
      * @param tag The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    override fun warn(message: String, tag: String, exception: Exception) {
+    override fun warn(message: String, tag: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.WARN)) return
-        warn(message, tag, exception, logFormat)
+        print(LogLevel.WARN, message, tag, throwable)
     }
 
     /**
@@ -137,11 +132,11 @@ open class LogInstance() : Logger {
      * The tag will default to the class name the log is created from.
      *
      * @param message The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    override fun warn(message: String, exception: Exception) {
+    override fun warn(message: String, throwable: Throwable) {
         if (!checkLogLevel(LogLevel.WARN)) return
-        warn(message, "", exception, logFormat)
+        print(LogLevel.WARN, message, "", throwable)
     }
 
     /**
@@ -152,7 +147,7 @@ open class LogInstance() : Logger {
      */
     override fun warn(message: String, tag: String) {
         if (!checkLogLevel(LogLevel.WARN)) return
-        warn(message, tag, null, logFormat)
+        print(LogLevel.WARN, message, tag, null)
     }
 
     /**
@@ -163,7 +158,7 @@ open class LogInstance() : Logger {
      */
     override fun warn(message: String) {
         if (!checkLogLevel(LogLevel.WARN)) return
-        warn(message, "", null, logFormat)
+        print(LogLevel.WARN, message, "", null)
     }
 
     /**
@@ -171,10 +166,10 @@ open class LogInstance() : Logger {
      *
      * @param message The log message
      * @param tag The tag the message is logged under
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    override fun error(message: String, tag: String, exception: Exception) {
-        error(message, tag, exception, logFormat)
+    override fun error(message: String, tag: String, throwable: Throwable) {
+        print(LogLevel.ERROR, message, tag, throwable)
     }
 
     /**
@@ -182,10 +177,10 @@ open class LogInstance() : Logger {
      * The tag will default to the class name the log is created from.
      *
      * @param message The log message
-     * @param exception The log-related exception
+     * @param throwable The log-related throwable
      */
-    override fun error(message: String, exception: Exception) {
-        error(message, "", exception, logFormat)
+    override fun error(message: String, throwable: Throwable) {
+        print(LogLevel.ERROR, message, "", throwable)
     }
 
     /**
@@ -195,7 +190,7 @@ open class LogInstance() : Logger {
      * @param tag The tag the message is logged under
      */
     override fun error(message: String, tag: String) {
-        error(message, tag, null, logFormat)
+        print(LogLevel.ERROR, message, tag, null)
     }
 
     /**
@@ -205,7 +200,7 @@ open class LogInstance() : Logger {
      * @param message The log message
      */
     override fun error(message: String) {
-        error(message, "", null, logFormat)
+        print(LogLevel.ERROR, message, "", null)
     }
 
     /**
@@ -250,5 +245,33 @@ open class LogInstance() : Logger {
     /**
      * Checks the given [level] against the LogLevel set in the Logger-instance.
      */
-    private fun checkLogLevel(level: LogLevel) = lock.read { logLevel <= level }
+    private fun checkLogLevel(level: LogLevel) = logLevel <= level
+
+    private fun print(level: LogLevel, message: String, tag: String = "", throwable: Throwable? = null) {
+        if (logFormat.occurrenceUsed || logFormat.tagFilterUsed || (logFormat.tagUsed && tag == "")) {
+            val trace = getTrace()
+            var newTag = tag
+            if (tag == "")
+                newTag = getTraceTag(trace)
+
+            if (tagIsFiltered(tag))
+                return
+
+            logFormat.print(level, System.currentTimeMillis(), message, newTag, throwable, getTrace())
+        } else
+            logFormat.print(level, System.currentTimeMillis(), message, tag, throwable, null)
+    }
+
+    private fun getTraceTag(trace: StackTraceElement): String {
+        val className = trace.className.split(".")
+        return className[className.size - 1]
+    }
+
+    private fun getTrace(): StackTraceElement {
+        return Exception().stackTrace[logFormat.traceSteps]
+    }
+
+    internal fun tagIsFiltered(tag: String): Boolean {
+        return logFormat.tagFilterUsed && logFormat.filterTag != tag
+    }
 }
