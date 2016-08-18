@@ -16,7 +16,7 @@ import de.jupf.staticlog.format.LogFormat
  * @created on 03.02.2016.
  */
 object Log {
-    val logInstance = LogInstance(4)
+    internal val logInstance = LogInstance(4)
     @JvmStatic var logLevel: LogLevel
         get() = logInstance.logLevel
         set(value) {

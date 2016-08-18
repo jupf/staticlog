@@ -9,10 +9,9 @@ import java.io.File
  * @author J.Pfeifer
  * @created 19.01.2016
  */
-open class LogInstance() : Logger {
-
+class LogInstance() : Logger {
     val logFormat = LogFormat() // The defined log format for this logger
-    var logLevel = LogLevel.DEBUG // Defines the minimum log level to print
+    override var logLevel = LogLevel.DEBUG // Defines the minimum log level to print
     var filterTag: String
         get() = logFormat.filterTag
         set(value) {
