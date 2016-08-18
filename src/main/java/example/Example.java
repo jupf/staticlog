@@ -1,8 +1,8 @@
 package example;
 
 import de.jupf.staticlog.Log;
-import de.jupf.staticlog.Logger;
 import de.jupf.staticlog.core.LogLevel;
+import de.jupf.staticlog.core.Logger;
 import de.jupf.staticlog.format.LogFormat;
 
 import static de.jupf.staticlog.Log.FormatOperations.*;
