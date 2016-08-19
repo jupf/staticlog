@@ -8,6 +8,7 @@ import de.jupf.staticlog.format.Builder
 import de.jupf.staticlog.format.Indent
 import de.jupf.staticlog.format.Line
 import de.jupf.staticlog.format.LogFormat
+import java.util.*
 
 /**
  * The StaticLog main logging interface object
@@ -25,6 +26,8 @@ object Log {
     var filterTag: String
         get() = logInstance.filterTag
         set(value) { logInstance.filterTag = value }
+
+    @JvmStatic val slf4jLogInstancesMap: Map<String,Logger> = LinkedHashMap()
 
     /**
      * Returns a logger instance for Java
