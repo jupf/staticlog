@@ -35,7 +35,7 @@ This library is uploaded to jCenter and Maven Central.
 
 ```gradle
 dependencies {
-    compile 'io.github.jupf.staticlog:staticlog:2.1.4'
+    compile 'io.github.jupf.staticlog:staticlog:2.1.8'
 }
 ```
 
