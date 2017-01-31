@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.+"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.13"
         classpath "com.netflix.nebula:gradle-extra-configurations-plugin:$extraConfVersion"
 
     }
@@ -26,7 +26,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
 group 'io.github.jupf.staticlog'
-version '2.1.8'
+version '2.1.9'
 
 compileJava {
     sourceCompatibility = "1.6"
