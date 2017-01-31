@@ -30,34 +30,29 @@ task sources4javaJar(type: Jar) {
 //    source = sourceSets.main.java.srcDirs
 //}
 
-task javadocJar(type: Jar) {
+task javadocJar(type: Jar, dependsOn: dokka) {
     baseName = 'staticlog'
     classifier = 'javadoc'
-    from javadoc
+    from dokka
 }
 
-task javadoc4javaJar(type: Jar) {
+task javadoc4javaJar(type: Jar, dependsOn: dokka) {
     baseName = 'staticlog-java'
     classifier = 'javadoc'
-    from javadoc
+    from dokka
 }
 
 dokka {
-    outputDirectory = "$buildDir/docs/kdoc"
+    moduleName = 'data'
+    outputFormat = 'javadoc'
+    outputDirectory = "$buildDir/docs/jdoc"
+    processConfigurations = ['compile']
+    includes = ['README.md']
+    samples = ['src/main/kotlin/example/example.kt']
+    linkMapping {
+        dir = "src/main/kotlin/de"
+        url = "https://github.com/jupf/staticlog/tree/master/src/main/kotlin"
+        suffix = "#L"
+    }
+    sourceDirs = files('src/main/kotlin')
 }
-
-task dokkaJar(type: Jar, dependsOn: dokka) {
-    baseName = 'staticlog'
-    classifier = 'dokka'
-    from dokka.outputDirectory
-}
-
-//dokka {
-//    outputDirectory = "$buildDir/docs/javadoc"
-//    outputFormat = 'javadoc'
-//}
-
-//task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
-//    outputFormat = 'javadoc'
-//    outputDirectory = "$buildDir/javadoc"
-//}
