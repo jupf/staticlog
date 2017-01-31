@@ -1,5 +1,5 @@
 # StaticLog  
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.3-blue.svg?style=flat) ](https://kotlinlang.org/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat) ](https://github.com/jupf/staticlog/blob/master/LICENSE) [![Dependency Status](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86/badge.svg)](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86) [ ![Download](https://api.bintray.com/packages/jupf/maven/StaticLog/images/download.svg?style=flat) ](https://bintray.com/jupf/maven/StaticLog/_latestVersion)  
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.6-blue.svg?style=flat) ](https://kotlinlang.org/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat) ](https://github.com/jupf/staticlog/blob/master/LICENSE) [![Dependency Status](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86/badge.svg)](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86) [ ![Download](https://api.bintray.com/packages/jupf/maven/StaticLog/images/download.svg?style=flat) ](https://bintray.com/jupf/maven/StaticLog/_latestVersion)  
   
 StaticLog is a super lightweight logging library implemented in pure Kotlin ([https://kotlinlang.org](https://kotlinlang.org/)). It is designed to be used in Kotlin, Java and Android.  
 It is for formatting standard output comfortably without the need to construct a Logger object. But it's also no problem to create one.  
@@ -35,7 +35,7 @@ This library is uploaded to jCenter and Maven Central.
 
 ```gradle
 dependencies {
-    compile 'io.github.jupf.staticlog:staticlog:2.1.8'
+    compile 'io.github.jupf.staticlog:staticlog:2.1.9'
 }
 ```
 
@@ -43,7 +43,7 @@ dependencies {
 <dependency>
     <groupId>io.github.jupf.staticlog</groupId>
     <artifactId>staticlog</artifactId>
-    <version>2.1.4</version>
+    <version>2.1.9</version>
 </dependency>
 ```
 
@@ -51,7 +51,7 @@ If you ___dont___ have the Kotlin runtime already present in your project, use t
 
 ```gradle
 dependencies {
-    compile 'io.github.jupf.staticlog:staticlog-java:2.1.3'
+    compile 'io.github.jupf.staticlog:staticlog-java:2.1.9'
 }
 ```
 
@@ -59,7 +59,7 @@ dependencies {
 <dependency>
     <groupId>io.github.jupf.staticlog</groupId>
     <artifactId>staticlog-java</artifactId>
-    <version>2.1.3</version>
+    <version>2.1.9</version>
 </dependency>
 ```
 
