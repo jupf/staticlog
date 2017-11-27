@@ -11,7 +11,7 @@ import java.util.*
  * @author J.Pfeifer
  * @created 20.01.2016
  */
-class LogFormat() : Scope() {
+class LogFormat : Scope() {
 
     internal var traceSteps = 3
     internal val printer: MutableList<Printer> = ArrayList()
@@ -19,7 +19,7 @@ class LogFormat() : Scope() {
     internal var tagFilterUsed = false
     internal var filterTag = "" // Only messages with this tag will be printed.
         set(value) {
-            if(value == "") {
+            if (value == "") {
                 tagFilterUsed = false
             } else {
                 tagFilterUsed = true
@@ -27,19 +27,21 @@ class LogFormat() : Scope() {
             }
         }
 
+    private val defaultPrinter: Printer
+
     init {
         line(date("yyyy-MM-dd HH:mm:ss.SSS"), space, level, text("/"), tag, space(2), message, space(2), occurrence)
 
-        when (System.getProperty("java.vm.vendor").equals("The Android Project")) {
-            true -> {
-                build {
-                    line(message, space(2), occurrence)
-                }
-                traceSteps = 4
-                printer.add(AndroidPrinter())
+        if (System.getProperty("java.vm.vendor") == "The Android Project") {
+            build {
+                line(message, space(2), occurrence)
             }
-            else -> printer.add(DesktopPrinter())
+            traceSteps = 4
+            defaultPrinter = AndroidPrinter()
+        } else {
+            defaultPrinter = DesktopPrinter()
         }
+        printer.add(defaultPrinter)
     }
 
     internal var exceptionFormat = Scope {
@@ -51,7 +53,7 @@ class LogFormat() : Scope() {
     }
 
     internal fun print(level: LogLevel, time: Long, message: String, tag: String = "", throwable: Throwable? = null, traceElement: StackTraceElement?) {
-        printer.forEach { it.print(level,time,message,tag,throwable,traceElement,this) }
+        printer.forEach { it.print(level, time, message, tag, throwable, traceElement, this) }
     }
 
     internal fun build(build: LogFormat.() -> Unit) {
@@ -68,6 +70,11 @@ class LogFormat() : Scope() {
                     tagUsed = true
             }
         }
+    }
+
+    internal fun setDefaultPrinter() {
+        printer.clear()
+        printer.add(defaultPrinter)
     }
 
 

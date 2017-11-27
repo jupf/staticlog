@@ -2,9 +2,8 @@ package de.jupf.staticlog.format
 
 import de.jupf.staticlog.core.LogLevel
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 import kotlin.collections.indices
-import kotlin.text.split
 
 /**
  * @author J.Pfeifer
@@ -39,17 +38,24 @@ class EpochBuilder : Builder {
     }
 }
 
-class DateBuilder(format: String) : Builder {
-    val dateFormat = SimpleDateFormat(format)
+class DateBuilder(format: String, locale: Locale = Locale.getDefault(), timeZone: TimeZone = TimeZone.getDefault(),
+                  val clockFunction: (Long) -> Long = USE_LOG_TIME) : Builder {
+    companion object {
+        val USE_LOG_TIME = { globalTime: Long -> globalTime }
+    }
+    private val dateFormat: SimpleDateFormat = SimpleDateFormat(if (format == "") "yyyy-MM-dd HH:mm:ss.SSS" else format, locale)
+    init {
+        dateFormat.timeZone = timeZone
+    }
 
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement?, indent: String) {
-        builder.append(dateFormat.format(Date(time)))
+        builder.append(dateFormat.format(Date(clockFunction(time))))
     }
 }
 
 class TagBuilder : Builder {
     override fun buildString(logLevel: LogLevel, time: Long, message: String, tag: String, exception: Throwable?, builder: StringBuilder, trace: StackTraceElement?, indent: String) {
-        builder.append("$tag")
+        builder.append(tag)
     }
 }
 

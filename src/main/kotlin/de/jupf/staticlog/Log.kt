@@ -8,6 +8,9 @@ import de.jupf.staticlog.format.Builder
 import de.jupf.staticlog.format.Indent
 import de.jupf.staticlog.format.Line
 import de.jupf.staticlog.format.LogFormat
+import de.jupf.staticlog.printer.AndroidPrinter
+import de.jupf.staticlog.printer.DesktopPrinter
+import de.jupf.staticlog.printer.Printer
 import java.util.*
 
 /**
@@ -29,6 +32,13 @@ object Log {
 
     @JvmStatic val slf4jLogInstancesMap: Map<String,Logger> = LinkedHashMap()
 
+    @JvmStatic
+    var slf4jLogLevel: LogLevel
+        get() = SLF4JBindingFacade.logLevel
+        set(value) {
+            SLF4JBindingFacade.logLevel = value
+        }
+
     /**
      * Returns a logger instance for Java
      */
@@ -43,6 +53,30 @@ object Log {
     @JvmStatic
     fun kotlinInstance(): Logger {
         return Logger(3)
+    }
+
+    /**
+     * Adding the given [printer] to the printers used by this [Logger]
+     */
+    @JvmStatic
+    fun addPrinter(printer: Printer) {
+        logInstance.addPrinter(printer)
+    }
+
+    /**
+     * Resets the [Printer] of this [Logger] to the default.
+     */
+    @JvmStatic
+    fun setDefaultPrinter() {
+        logInstance.setDefaultPrinter()
+    }
+
+    /**
+     * Sets the given [printer] as the new and only printer for this [Logger].
+     */
+    @JvmStatic
+    fun setPrinter(printer: Printer) {
+        logInstance.setPrinter(printer)
     }
 
     /**

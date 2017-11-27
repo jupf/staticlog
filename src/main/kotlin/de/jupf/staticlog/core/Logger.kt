@@ -1,6 +1,11 @@
 package de.jupf.staticlog.core
 
+import de.jupf.staticlog.Log
 import de.jupf.staticlog.format.LogFormat
+import de.jupf.staticlog.printer.AndroidPrinter
+import de.jupf.staticlog.printer.DesktopPrinter
+import de.jupf.staticlog.printer.Printer
+import java.util.*
 
 /**
  * @author J.Pfeifer
@@ -239,7 +244,29 @@ class Logger() {
     }
 
     /**
-     * Checks the given [level] against the LogLevel set in the Logger-instance.
+     * Adding the given [printer] to the printers used by this [Logger]
+     */
+    fun addPrinter(printer: Printer) {
+        logFormat.printer.add(printer)
+    }
+
+    /**
+     * Resets the [Printer] of this [Logger] to the default.
+     */
+    fun setDefaultPrinter() {
+        logFormat.setDefaultPrinter()
+    }
+
+    /**
+     * Sets the given [printer] as the new and only printer for this [Logger].
+     */
+    fun setPrinter(printer: Printer) {
+        logFormat.printer.clear()
+        logFormat.printer.add(printer)
+    }
+
+    /**
+     * Checks the given [level] against the [LogLevel] set in this [Logger].
      */
     private fun checkLogLevel(level: LogLevel) = logLevel <= level
 
@@ -267,7 +294,7 @@ class Logger() {
         return Exception().stackTrace[logFormat.traceSteps]
     }
 
-    internal fun tagIsFiltered(tag: String): Boolean {
+    private fun tagIsFiltered(tag: String): Boolean {
         return logFormat.tagFilterUsed && logFormat.filterTag != tag
     }
 }

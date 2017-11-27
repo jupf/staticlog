@@ -2,14 +2,11 @@ package de.jupf.staticlog.printer
 
 import de.jupf.staticlog.core.LogLevel
 import de.jupf.staticlog.format.LogFormat
-import java.io.OutputStream
-import java.nio.charset.Charset
+import java.util.*
 
 /**
- * INSERT DESCRIPTION
- *
  * @created 25.04.2016
- * @author jpf
+ * @author J.Pfeifer
  */
 class DesktopPrinter : Printer {
     override fun print(level: LogLevel, time: Long, message: String, tag: String, throwable: Throwable?, trace: StackTraceElement?, logFormat: LogFormat) {
@@ -23,12 +20,12 @@ class DesktopPrinter : Printer {
     }
 
     internal fun printerrFlush(message: Any?) {
-        System.err.print(message);
+        System.err.print(message)
         System.err.flush()
     }
 
     internal fun printFlush(message: Any?) {
-        System.out.print(message);
+        System.out.print(message)
         System.out.flush()
     }
 

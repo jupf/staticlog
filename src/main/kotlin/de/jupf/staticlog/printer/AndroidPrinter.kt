@@ -4,16 +4,14 @@ import android.util.Log
 import de.jupf.staticlog.core.LogLevel
 import de.jupf.staticlog.format.LogFormat
 import de.jupf.staticlog.format.TagBuilder
-import java.io.OutputStream
+import java.util.*
 
 /**
- * INSERT DESCRIPTION
- *
  * @created 25.04.2016
- * @author jpf
+ * @author J.Pfeifer
  */
 class AndroidPrinter : Printer {
-    internal val androidTag = TagBuilder()
+    private val androidTag = TagBuilder()
 
     override fun print(level: LogLevel, time: Long, message: String, tag: String, throwable: Throwable?, trace: StackTraceElement?, logFormat: LogFormat) {
         val builder = StringBuilder()

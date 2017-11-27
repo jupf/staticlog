@@ -1,6 +1,8 @@
 package de.jupf.staticlog.format
 
 import de.jupf.staticlog.core.LogLevel
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
 
 /**
@@ -95,8 +97,8 @@ open class Scope() : Builder {
         return tabs
     }
 
-    fun date(format: String): Builder {
-        return DateBuilder(format)
+    fun date(format: String = "", locale: Locale = Locale.getDefault(), timeZone: TimeZone = TimeZone.getDefault(), clockFunction: (Long) -> Long = DateBuilder.USE_LOG_TIME): Builder {
+        return DateBuilder(format, locale, timeZone, clockFunction)
     }
 
     fun text(text: String): Builder {
