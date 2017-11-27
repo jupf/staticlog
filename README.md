@@ -1,5 +1,5 @@
 # StaticLog  
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.6-blue.svg?style=flat) ](https://kotlinlang.org/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat) ](https://github.com/jupf/staticlog/blob/master/LICENSE) [![Dependency Status](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86/badge.svg)](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86) [ ![Download](https://api.bintray.com/packages/jupf/maven/StaticLog/images/download.svg?style=flat) ](https://bintray.com/jupf/maven/StaticLog/_latestVersion)  
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.1.61-blue.svg?style=flat) ](https://kotlinlang.org/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat) ](https://github.com/jupf/staticlog/blob/master/LICENSE) [![Dependency Status](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86/badge.svg)](https://www.versioneye.com/user/projects/56cc29b518b2710403dfed86) [ ![Download](https://api.bintray.com/packages/jupf/maven/StaticLog/images/download.svg?style=flat) ](https://bintray.com/jupf/maven/StaticLog/_latestVersion)  
   
 StaticLog is a super lightweight logging library implemented in pure Kotlin ([https://kotlinlang.org](https://kotlinlang.org/)). It is designed to be used in Kotlin, Java and Android.  
 It is for formatting standard output comfortably without the need to construct a Logger object. But it's also no problem to create one.  
@@ -18,12 +18,14 @@ Yes, the occurrence of the log message is clickable!
         - [Tag Filtering in Kotlin](#tag-filtering-in-kotlin)
 		- [Log instances in Kotlin](#log-instances-in-kotlin)
 		- [FormatBuilders in Kotlin](#formatbuilders-in-kotlin)
+		- [Custom Printers in Kotlin](#custom-printers-in-kotlin)
 	- [StaticLog in Java](#staticlog-in-java)
 		- [Logging in Java](#logging-in-java)
 		- [Formatting Output in Java](#formatting-output-in-java)
 		- [Tag Filtering in Java](#tag-filtering-in-java)
 		- [Log instances in Java](#log-instances-in-java)
 		- [FormatBuilders in Java](#formatbuilders-in-java)
+		- [Custom Printers in Java](#custom-printers-in-java)
 	- [StaticLog in Android](#staticlog-in-android)
 
 ## Getting Started  
@@ -35,7 +37,7 @@ This library is uploaded to jCenter and Maven Central.
 
 ```gradle
 dependencies {
-    compile 'io.github.jupf.staticlog:staticlog:2.1.9'
+    compile 'io.github.jupf.staticlog:staticlog:2.2.0'
 }
 ```
 
@@ -51,7 +53,7 @@ If you ___dont___ have the Kotlin runtime already present in your project, use t
 
 ```gradle
 dependencies {
-    compile 'io.github.jupf.staticlog:staticlog-java:2.1.9'
+    compile 'io.github.jupf.staticlog:staticlog-java:2.2.0'
 }
 ```
 
@@ -148,6 +150,10 @@ Here are all possible FormatBuilders:
 | tab(X: Integer)  | Prints X tabs |
 | text(S: String)  | Prints the String S |
 
+### Custom Printers in Kotlin
+
+tbd
+
 ## StaticLog in Java  
 
 You can find the example source code [here](https://github.com/jupf/staticlog/blob/master/src/main/java/example/Example.java).  
@@ -230,6 +236,10 @@ Here are all possible FormatBuilders:
 | space(X: Integer)| Prints X spaces    |
 | tab(X: Integer)  | Prints X tabs |
 | text(S: String)  | Prints the String S |
+
+### Custom Printers in Java
+
+tbd
 
 ## StaticLog in Android  
 
